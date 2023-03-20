@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Release Management &mdash; ForestNavigator  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Go with the flow" href="go-with-the-flow.html" />
+    <link rel="prev" title="Specialized Data Stores" href="specialized-data-stores.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #C8C8C8" >
+            <a href="../index.html">
+            <img src="../_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2023-3-20
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+   
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="version-control.html">Version Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-git-ecosystem.html">The Git ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FAIR-principles.html">FAIR principles, formats, and reproducibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understanding-git.html">Understanding Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="taming-git.html">Taming Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="specialized-data-stores.html">Specialized Data Stores</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Release Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tagging">Tagging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#github-gitlab-release-management">GitHub/GitLab Release Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zenodo-release-management">Zenodo Release Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#zenodo-only">Zenodo only</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#manual-zenodo-upload-of-git-release">Manual Zenodo upload of Git release</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#automatic-zenodo-upload-of-github-release">Automatic Zenodo upload of GitHub release</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updating-zenodo-releases">Updating Zenodo releases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="go-with-the-flow.html">Go with the flow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../it-infrastructure.html">IT Infrastructure</a></li>
+</ul>
+
+   <p class="caption">
+     <span class="caption-text">References:</span>
+   </p>
+   <ul>
+        <li class="toctree-l1"><a href= "../genindex.html">Index</a></li>
+   </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #C8C8C8" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ForestNavigator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../managing-code-and-data.html">Managing Code and Data</a></li>
+      <li class="breadcrumb-item active">Release Management</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="release-management">
+<span id="index-0"></span><h1>Release Management<a class="headerlink" href="#release-management" title="Permalink to this heading"></a></h1>
+<p>Once your code or data has evolved to a state of readiness, you can release it.
+How to do so depends on the audience and intended use of the code or data. For
+example, you may release for:</p>
+<ul class="simple">
+<li><p>Deploying code into production.</p></li>
+<li><p>Making available a new version to users.</p></li>
+<li><p>Providing a dataset to project partners.</p></li>
+<li><p>Release a citable version of a code base or dataset to the public.</p></li>
+<li><p>…</p></li>
+</ul>
+<p id="index-1">Typically, releases are done by the owner of the code base or dataset. For
+workflows with multiple collaborators where ownership is shared, a capable
+collaborator should take on the role of release manager.</p>
+<section id="tagging">
+<span id="index-2"></span><h2>Tagging<a class="headerlink" href="#tagging" title="Permalink to this heading"></a></h2>
+<p>Using <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Basics-Tagging">Git’s tagging feature</a> you can attach a label to
+a commit (a particular version of the tree of files under management) so that
+you can easily return that that particular version later. When people or
+automation scripts watching the repository understand the name convention chosen
+for the tags, that can be enough for a release. Typically, you will want to
+adopt some <a class="reference external" href="https://en.wikipedia.org/wiki/Software_versioning">versioning scheme</a> to name the tags.</p>
+</section>
+<section id="github-gitlab-release-management">
+<h2>GitHub/GitLab Release Management<a class="headerlink" href="#github-gitlab-release-management" title="Permalink to this heading"></a></h2>
+<p>When the repository is hosted on GitHub or GitLab, you can manage releases
+through the web interface via which the repository is administered. Both GitHub
+and GitLab allow you to create a tag (see above), write a release description,
+and have the release show under <a class="reference external" href="https://en.wikipedia.org/wiki/Permalink">a permalink</a> together with downloadable assets.
+This allows people to browse releases and review release notes before
+downloading release assets. For details see the documentation on <a class="reference external" href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository">GitHub release
+management</a>
+and <a class="reference external" href="https://docs.gitlab.com/ee/user/project/releases/">GitLab releases</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No system administrator needs to be involved in this since the contributor
+that manages the release can connect the release branch in his or her local
+repository to the GitHub/GitLab repository, prepare the release, and push it
+out when tested and ready. Then the manager uses the GitHub/GitLab web
+interface to write the release notes and define the tag.</p>
+</div>
+</section>
+<section id="zenodo-release-management">
+<h2>Zenodo Release Management<a class="headerlink" href="#zenodo-release-management" title="Permalink to this heading"></a></h2>
+<p>Zenodo allows you to publish research outputs of up to 50GB in size and obtain a
+citable DOI. Your uploads can be grouped under one or more communities.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Add project community description and link</p>
+</div>
+<section id="zenodo-only">
+<h3>Zenodo only<a class="headerlink" href="#zenodo-only" title="Permalink to this heading"></a></h3>
+<p>When your research output is not evolving so that there is no point to manage it
+via Git, you can just upload the to Zenodo only, specify the metadata, and be
+done. Be sure to comply with the metadata standards and pick the right community
+or communities to publish under. To do so:</p>
+<ol class="arabic simple">
+<li><p>Log in to Zenodo</p></li>
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Upload</span></code>.</p></li>
+<li><p>Fill in the metadata details in the form that appears.</p></li>
+<li><p>Upload your files.</p></li>
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">Publish</span></code>.</p></li>
+</ol>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Add linkage to project metadata standards</p>
+</div>
+</section>
+<section id="manual-zenodo-upload-of-git-release">
+<h3>Manual Zenodo upload of Git release<a class="headerlink" href="#manual-zenodo-upload-of-git-release" title="Permalink to this heading"></a></h3>
+<p>When your research output is evolving and under Git management, you can make
+your release citable with a Zenodo DOI, and make it findable and downloadable
+via Zenodo. To do so manually:</p>
+<ol class="arabic simple">
+<li><p>First reserve a DOI by logging in to Zenodo, clicking on the <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Upload</span></code>
+button, and under the Digital Object Identifier section clicking <code class="docutils literal notranslate"><span class="pre">Reserve</span>
+<span class="pre">DOI</span></code>.</p></li>
+<li><p>Paste the DOI into a README or other documentation in your Git-managed file
+tree. You can turn the DOI into a clickable URL by prefixing it with
+<code class="docutils literal notranslate"><span class="pre">https://doi.org/</span></code>. Typically, you will have a section in the documentation
+called “How to cite” where you want the DOI to appear.</p></li>
+<li><p>Make a release of the repository as per the instructions in the <a class="reference internal" href="#tagging"><span class="std std-ref">Tagging</span></a> or <a class="reference internal" href="#github-gitlab-release-management"><span class="std std-ref">GitHub/GitLab
+Release Management</span></a> sections above.</p></li>
+<li><p>Obtain a ZIP or other archive of the release. When you use GitHub or GitLab
+release management, such an archive is automatically created and downloadable
+from the release page. When you tag releases locally, archive a clean
+worktree corresponding to the release commit, and make sure that the <cite>.git</cite>
+holding the local repository data store is excluded.</p></li>
+<li><p>Proceed as detailed in the prior <a class="reference internal" href="#zenodo-only"><span class="std std-ref">Zenodo only</span></a> section, and upload
+the archive in step 4.</p></li>
+</ol>
+</section>
+<section id="automatic-zenodo-upload-of-github-release">
+<h3>Automatic Zenodo upload of GitHub release<a class="headerlink" href="#automatic-zenodo-upload-of-github-release" title="Permalink to this heading"></a></h3>
+<p>When releasing on GitHub, you can use the <a class="reference external" href="https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content#issuing-a-persistent-identifier-for-your-repository-with-zenodo">Zenodo-GitHub integration</a>
+to automatically archive your GitHub releases on Zenodo and create a new Zenodo
+DOI for each release.</p>
+</section>
+<section id="updating-zenodo-releases">
+<h3>Updating Zenodo releases<a class="headerlink" href="#updating-zenodo-releases" title="Permalink to this heading"></a></h3>
+<p>Zenodo allows you to issue a new versions of your research output as updates
+under the same record. This is called <a class="reference external" href="https://blog.zenodo.org/2017/05/30/doi-versioning-launched/">DOI versioning</a>. Zenodo
+generates a DOI for the entire series of versions, and also specific DOIs for
+each version. See the <a class="reference external" href="https://help.zenodo.org/#versioning">DOI versioning FAQ</a> for details.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="specialized-data-stores.html" class="btn btn-neutral float-left" title="Specialized Data Stores" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="go-with-the-flow.html" class="btn btn-neutral float-right" title="Go with the flow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Albert Brouwer, IIASA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

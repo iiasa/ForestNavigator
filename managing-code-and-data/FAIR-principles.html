@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAIR principles, formats, and reproducibility &mdash; ForestNavigator  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Understanding Git" href="understanding-git.html" />
+    <link rel="prev" title="Workflows" href="workflows.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #C8C8C8" >
+            <a href="../index.html">
+            <img src="../_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2023-3-20
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+   
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="version-control.html">Version Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-git-ecosystem.html">The Git ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html">Workflows</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FAIR principles, formats, and reproducibility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fair-principles">FAIR principles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#text-formats">Text formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reproducibility">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="understanding-git.html">Understanding Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="taming-git.html">Taming Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="specialized-data-stores.html">Specialized Data Stores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-management.html">Release Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="go-with-the-flow.html">Go with the flow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../it-infrastructure.html">IT Infrastructure</a></li>
+</ul>
+
+   <p class="caption">
+     <span class="caption-text">References:</span>
+   </p>
+   <ul>
+        <li class="toctree-l1"><a href= "../genindex.html">Index</a></li>
+   </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #C8C8C8" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ForestNavigator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../managing-code-and-data.html">Managing Code and Data</a></li>
+      <li class="breadcrumb-item active">FAIR principles, formats, and reproducibility</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fair-principles-formats-and-reproducibility">
+<span id="index-0"></span><h1>FAIR principles, formats, and reproducibility<a class="headerlink" href="#fair-principles-formats-and-reproducibility" title="Permalink to this heading"></a></h1>
+<section id="fair-principles">
+<h2>FAIR principles<a class="headerlink" href="#fair-principles" title="Permalink to this heading"></a></h2>
+<a class="reference internal image-reference" href="../_images/FAIR_data_principles.jpg"><img alt="../_images/FAIR_data_principles.jpg" class="align-center" src="../_images/FAIR_data_principles.jpg" style="width: 600px;" /></a>
+<p>For ForestNavigator we are obliged abide by <a class="reference external" href="https://www.go-fair.org/fair-principles/">FAIR principles</a> for
+research data management. Doing so can involve a considerable separate effort.
+By combining the <a class="reference internal" href="workflows.html#workflows"><span class="std std-ref">workflows detailed earlier</span></a> while keeping FAIR in mind, you
+can create a custom data management workflow that accommodates several
+FAIR concerns:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../it-infrastructure.html#zenodo"><span class="std std-ref">GitHub-Zenodo integration</span></a> can make your data
+findable.</p></li>
+<li><p>Publishing on GitHub or GitLab makes your data accessible.</p></li>
+<li><p>Managing metadata together with data using Git keeps both in-sync and
+co-located.</p></li>
+</ul>
+<p>In support of FAIR, prefer standard data formats and metadata formats that:</p>
+<ul class="simple">
+<li><p>Are commonly used in the specific field of research.</p></li>
+<li><p>Are an open standard.</p></li>
+<li><p>Can be manipulated with open-source tools.</p></li>
+<li><p>Are machine-readable.</p></li>
+</ul>
+<p>For example, <a class="reference external" href="https://en.wikipedia.org/wiki/NetCDF">NetCDF</a> is a good choice
+— picking Excel is problematic for many reasons. Suitable metadata standards can
+be selected by exploring the <a class="reference external" href="https://www.dcc.ac.uk/guidance/standards/metadata/list">DCC Metadata Standards</a> and the <a class="reference external" href="https://rdamsc.bath.ac.uk/">Metadata
+Standards Catalog</a>.</p>
+</section>
+<section id="text-formats">
+<span id="index-1"></span><h2>Text formats<a class="headerlink" href="#text-formats" title="Permalink to this heading"></a></h2>
+<p>Text files are human-readable and hence accessible. Prefer a text format that is
+also machine-readable such as <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/JSON">JSON</a>, or <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">YAML</a> when storing relatively small data for
+which the inefficiency of text-based formats matters little.<a class="footnote-reference brackets" href="#f1" id="id1">1</a> Ensure that
+the text flows across multiple lines<a class="footnote-reference brackets" href="#f2" id="id2">2</a> for readability and to enable Git
+to asses, merge, and display line-based differences when making changes. This
+makes such data very easy to manage.</p>
+<div class="admonition note" id="index-2">
+<p class="admonition-title">Note</p>
+<p>When using a text-based data format, pay mind to the <a class="reference external" href="https://en.wikipedia.org/wiki/Character_encoding">character encoding</a>. For maximum
+accessibility and reusability, pick a <a class="reference external" href="https://en.wikipedia.org/wiki/Unicode">Unicode</a> format, preferably UTF-8, or limit
+the text to the <a class="reference external" href="https://en.wikipedia.org/wiki/ASCII">ASCII</a> subset shared
+by many character encodings.</p>
+</div>
+<div class="admonition caution" id="index-3">
+<p class="admonition-title">Caution</p>
+<p>There are two common ways to <a class="reference external" href="https://en.wikipedia.org/wiki/Newline">encode newlines</a> in text files. The <code class="docutils literal notranslate"><span class="pre">LF</span></code> encoding
+is used on MacOS and Linux/UNIX. The <code class="docutils literal notranslate"><span class="pre">CR</span> <span class="pre">LF</span></code> encoding is used on Windows.
+Much software can use both. In such a case, prefer the <code class="docutils literal notranslate"><span class="pre">LF</span></code> encoding.</p>
+<p>When newlines do matter, be sure to keep them under control. To help with
+that, you can <a class="reference external" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration">configure Git</a> to
+automatically convert newline encoding on commit or checkout.</p>
+</div>
+</section>
+<section id="reproducibility">
+<span id="index-4"></span><h2>Reproducibility<a class="headerlink" href="#reproducibility" title="Permalink to this heading"></a></h2>
+<p>Reproducibility is a basic tenet of science. Following the FAIR principles goes
+some way towards making your research reproducible. Also using a Git-based
+workflow allows you or others to go back in time and retrieve old code or data
+versions to reproduce prior results. When you expect that your current work may
+need to be reproduced in the future, you can have <a class="reference internal" href="release-management.html#tagging"><span class="std std-ref">Git tag the current
+commit or use more involved release management</span></a> to enable people to easily
+return to this point in your file tree’s history.</p>
+<p>Even when all FAIR principles have been followed, just providing the data may
+not be enough for reproducibility. Also providing the actual code that does the
+data wrangling is often necessary to make it practical to reproduce results. But
+how to tie code to the actual data used or produced? Here too, a Git-based
+workflow can help out. You can for example:</p>
+<ul class="simple">
+<li><p>Include code and data in the same Git repository.</p></li>
+<li><p><a class="reference internal" href="workflows.html#referencing-repositories"><span class="std std-ref">Reference a Git data repository</span></a> from a Git code
+repository as a submodule.</p></li>
+<li><p><a class="reference internal" href="workflows.html#referencing-assets"><span class="std std-ref">Reference data on a remote server</span></a> by URL from a Git code
+repository and include download scripting.</p></li>
+<li><p>Publish result data in a Git repository that references as a submodule the
+repository containing the code used to perform the processing.</p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Compared to binary data, text-based numerical data takes up about a
+factor of three more space at full precision,<a class="footnote-reference brackets" href="#f3" id="id3">3</a> and may take
+considerable time to parse.</p>
+</dd>
+<dt class="label" id="f2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Formats such as JSON and XML can have all content scrunched onto a
+single long line. A “pretty print” option that flows the text across
+multiple lines is available in libraries that write these formats.</p>
+</dd>
+<dt class="label" id="f3"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>Floating point numbers require special care when represented as text.
+The full binary precision will only be encoded in the text if you allow for
+sufficient digits of precision instead of truncating with few digits after
+the decimal point when generating the text.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="workflows.html" class="btn btn-neutral float-left" title="Workflows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="understanding-git.html" class="btn btn-neutral float-right" title="Understanding Git" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Albert Brouwer, IIASA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
