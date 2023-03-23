@@ -33,7 +33,7 @@
             <img src="../_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v2023-3-20
+                v2023-3-23
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -57,12 +57,15 @@
 <li class="toctree-l2"><a class="reference internal" href="specialized-data-stores.html">Specialized Data Stores</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Release Management</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#tagging">Tagging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#github-gitlab-release-management">GitHub/GitLab Release Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#github-gitlab-release-management">GitHub/GitLab Release Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#workflows">Workflows</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#zenodo-release-management">Zenodo Release Management</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#zenodo-only">Zenodo only</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#manual-zenodo-upload-of-git-release">Manual Zenodo upload of Git release</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#releasing-new-versions">Releasing new versions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#automatic-zenodo-upload-of-github-release">Automatic Zenodo upload of GitHub release</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#updating-zenodo-releases">Updating Zenodo releases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#manual-zenodo-upload-of-a-git-release">Manual Zenodo upload of a Git release</a></li>
 </ul>
 </li>
 </ul>
@@ -117,99 +120,181 @@ example, you may release for:</p>
 <li><p>Release a citable version of a code base or dataset to the public.</p></li>
 <li><p>…</p></li>
 </ul>
-<p id="index-1">Typically, releases are done by the owner of the code base or dataset. For
+<p id="release-manager">Typically, releases are done by the owner of the code base or dataset. For
 workflows with multiple collaborators where ownership is shared, a capable
 collaborator should take on the role of release manager.</p>
 <section id="tagging">
-<span id="index-2"></span><h2>Tagging<a class="headerlink" href="#tagging" title="Permalink to this heading"></a></h2>
+<span id="index-1"></span><h2>Tagging<a class="headerlink" href="#tagging" title="Permalink to this heading"></a></h2>
 <p>Using <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Basics-Tagging">Git’s tagging feature</a> you can attach a label to
 a commit (a particular version of the tree of files under management) so that
-you can easily return that that particular version later. When people or
+you can easily return to that particular version later. When people or
 automation scripts watching the repository understand the name convention chosen
-for the tags, that can be enough for a release. Typically, you will want to
+for tags, tagging can suffice for making a release. Typically, you will want to
 adopt some <a class="reference external" href="https://en.wikipedia.org/wiki/Software_versioning">versioning scheme</a> to name the tags.</p>
 </section>
 <section id="github-gitlab-release-management">
-<h2>GitHub/GitLab Release Management<a class="headerlink" href="#github-gitlab-release-management" title="Permalink to this heading"></a></h2>
-<p>When the repository is hosted on GitHub or GitLab, you can manage releases
+<span id="release-github-gitlab"></span><h2>GitHub/GitLab Release Management<a class="headerlink" href="#github-gitlab-release-management" title="Permalink to this heading"></a></h2>
+<p>With a Git repository hosted on GitHub or GitLab, you can manage releases
 through the web interface via which the repository is administered. Both GitHub
 and GitLab allow you to create a tag (see above), write a release description,
 and have the release show under <a class="reference external" href="https://en.wikipedia.org/wiki/Permalink">a permalink</a> together with downloadable assets.
-This allows people to browse releases and review release notes before
-downloading release assets. For details see the documentation on <a class="reference external" href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository">GitHub release
-management</a>
-and <a class="reference external" href="https://docs.gitlab.com/ee/user/project/releases/">GitLab releases</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>No system administrator needs to be involved in this since the contributor
-that manages the release can connect the release branch in his or her local
-repository to the GitHub/GitLab repository, prepare the release, and push it
-out when tested and ready. Then the manager uses the GitHub/GitLab web
-interface to write the release notes and define the tag.</p>
+For details see the documentation on <a class="reference external" href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository">GitHub release management</a>
+and <a class="reference external" href="https://docs.gitlab.com/ee/user/project/releases/">GitLab releases</a>. This
+allows people to browse releases, view release notes, and download release
+assets via the GitHub/GitLab web interface (in addition to robustly fetching the
+release via a Git client).</p>
+<p>The web interface for managing the repository provided by GitHub and GitLab
+contains settings that control whether the repository and hence the release is
+public or private. When private, only select users are given access. Users that
+have access can download the entirety of the repository.</p>
+<p>This means that the release manager should be very mindful and control what
+subset of information flows into the release repository:</p>
+<ul class="simple">
+<li><p>Only a well-tested version should be released.</p></li>
+<li><p>Privacy-sensitive information may need to be filtered out.</p></li>
+<li><p>Security-sensitive information such as credentials or tokens should not be
+exposed to the public nor to unauthorized collaborators.</p></li>
+<li><p>…</p></li>
+</ul>
+<p>Typically, the release manager does so by pushing only a cleaned up
+well-validated branch from his or her local repository to the GitHub/GitLab
+repository.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Git allows you to go back in time. If the last commit is clean, but any of
+the prior commits in the branch being made public contain sensitive
+information, that information can be uncovered by anyone.</p>
 </div>
+<p>In summary, the release manager can connect a clean release branch in his or her
+local repository to a GitHub or GitLab repository, prepare the release locally
+in that branch, and push the branch out once ready and validated. Then the
+manager uses the GitHub/GitLab web interface to write the release notes and
+define the tag.</p>
+<section id="workflows">
+<h3>Workflows<a class="headerlink" href="#workflows" title="Permalink to this heading"></a></h3>
+<p><a class="reference external" href="https://docs.gitlab.com/ee/topics/gitlab_flow.html">This discussion of Git branching workflows</a> gives good sight on how
+these can support GitHub/GitLab release management.</p>
+</section>
 </section>
 <section id="zenodo-release-management">
-<h2>Zenodo Release Management<a class="headerlink" href="#zenodo-release-management" title="Permalink to this heading"></a></h2>
-<p>Zenodo allows you to publish research outputs of up to 50GB in size and obtain a
-citable DOI. Your uploads can be grouped under one or more communities.</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Add project community description and link</p>
+<span id="zenodo-release"></span><h2>Zenodo Release Management<a class="headerlink" href="#zenodo-release-management" title="Permalink to this heading"></a></h2>
+<p>To make your research output findable and citable, you can release it on Zenodo.
+Zenodo allows uploads of file sets up to 50GB in size, assists description with
+metadata, and provides a <a class="reference external" href="https://en.wikipedia.org/wiki/Digital_object_identifier">digital object identifier</a> (DOI).</p>
+<p>Your uploads can be grouped under one or more communities. ForestNavigator research
+outputs should be published under the <a class="reference external" href="https://zenodo.org/communities/forestnavigator">ForestNavigator Zenodo community</a>. Submissions will be
+verified before being accepted as part of the community. The submitter may
+first be contacted for clarification.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use <a class="reference external" href="https://sandbox.zenodo.org">https://sandbox.zenodo.org</a> as a playground to practice using Zenodo or to
+test scripts that use Zenodo. This sandbox environment does not allocate
+permanent DOIs nor does it generate permanent records.</p>
 </div>
+<p>The following subsections detail various ways to use Zenodo as part of your
+release workflow.</p>
 <section id="zenodo-only">
 <h3>Zenodo only<a class="headerlink" href="#zenodo-only" title="Permalink to this heading"></a></h3>
-<p>When your research output is not evolving so that there is no point to manage it
-via Git, you can just upload the to Zenodo only, specify the metadata, and be
+<p>When your research output is not evolving and does not need to be downloadable
+in a robust way that can be scripted, then there is no need to manage the files
+with Git and you can just upload to Zenodo only, specify the metadata, and be
 done. Be sure to comply with the metadata standards and pick the right community
 or communities to publish under. To do so:</p>
 <ol class="arabic simple">
 <li><p>Log in to Zenodo</p></li>
 <li><p>Click on the <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Upload</span></code>.</p></li>
-<li><p>Fill in the metadata details in the form that appears.</p></li>
+<li><p>Fill in the metadata form that appears.</p></li>
 <li><p>Upload your files.</p></li>
 <li><p>Click on <code class="docutils literal notranslate"><span class="pre">Publish</span></code>.</p></li>
 </ol>
-<div class="admonition-todo admonition" id="id2">
+<div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
 <p>Add linkage to project metadata standards</p>
 </div>
 </section>
-<section id="manual-zenodo-upload-of-git-release">
-<h3>Manual Zenodo upload of Git release<a class="headerlink" href="#manual-zenodo-upload-of-git-release" title="Permalink to this heading"></a></h3>
+<section id="releasing-new-versions">
+<h3>Releasing new versions<a class="headerlink" href="#releasing-new-versions" title="Permalink to this heading"></a></h3>
+<p>Zenodo allows you to release new versions of your research output as updates
+under the same record. To do so manually, select a published record, click on
+the <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">version</span></code> button, and proceed to upload files and adjust the metadata.
+Zenodo generates separate DOIs for each version and also a shared DOI for the
+entire series of versions.</p>
+<p>This feature is called <a class="reference external" href="https://blog.zenodo.org/2017/05/30/doi-versioning-launched/">DOI versioning</a>. See the <a class="reference external" href="https://help.zenodo.org/#versioning">DOI
+versioning FAQ</a> for further details.</p>
+</section>
+<section id="automatic-zenodo-upload-of-github-release">
+<span id="zenodo-github"></span><h3>Automatic Zenodo upload of GitHub release<a class="headerlink" href="#automatic-zenodo-upload-of-github-release" title="Permalink to this heading"></a></h3>
+<p>When <a class="reference internal" href="#release-github-gitlab"><span class="std std-ref">releasing on GitHub</span></a>, you can use the
+<a class="reference external" href="https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content#issuing-a-persistent-identifier-for-your-repository-with-zenodo">Zenodo-GitHub integration</a>
+to automatically archive your GitHub releases on Zenodo and have Zenodo generate
+a new DOI for each release. Each additional release is logged as a <a class="reference internal" href="#releasing-new-versions"><span class="std std-ref">new
+version</span></a>
+under the Zenodo record.</p>
+<p>You can <a class="reference external" href="https://developers.zenodo.org/#add-metadata-to-your-github-repository-release">add metadata to your GitHub repository release</a>
+via a <code class="docutils literal notranslate"><span class="pre">.zenodo.json</span></code> file that is used by Zenodo to automatically populate the
+metadata of the publication record.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Zenodo can also automatically populate the metadata from a <a class="reference external" href="https://citation-file-format.github.io/">Citation File
+Format</a> (CFF) file included in
+the repository, but that format supports fewer entries. You may wish to
+nevertheless include it as an additional convenience.</p>
+</div>
+</section>
+<section id="manual-zenodo-upload-of-a-git-release">
+<h3>Manual Zenodo upload of a Git release<a class="headerlink" href="#manual-zenodo-upload-of-a-git-release" title="Permalink to this heading"></a></h3>
 <p>When your research output is evolving and under Git management, you can make
 your release citable with a Zenodo DOI, and make it findable and downloadable
 via Zenodo. To do so manually:</p>
-<ol class="arabic simple">
-<li><p>First reserve a DOI by logging in to Zenodo, clicking on the <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Upload</span></code>
-button, and under the Digital Object Identifier section clicking <code class="docutils literal notranslate"><span class="pre">Reserve</span>
-<span class="pre">DOI</span></code>.</p></li>
-<li><p>Paste the DOI into a README or other documentation in your Git-managed file
+<ol class="arabic">
+<li><p>First reserve a DOI. Log in to Zenodo, and click on the <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Upload</span></code>
+button. A form showing metadata and upload fields should appear. Under the
+Digital Object Identifier section click <code class="docutils literal notranslate"><span class="pre">Reserve</span> <span class="pre">DOI</span></code>.</p>
+<ul class="simple">
+<li><p>Or, when releasing a new version, select the published record holding the
+prior release, click on <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">version</span></code>,  and under the Digital Object
+Identifier section click <code class="docutils literal notranslate"><span class="pre">Reserve</span> <span class="pre">DOI</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Paste the DOI into a README and other documentation in your Git-managed file
 tree. You can turn the DOI into a clickable URL by prefixing it with
 <code class="docutils literal notranslate"><span class="pre">https://doi.org/</span></code>. Typically, you will have a section in the documentation
-called “How to cite” where you want the DOI to appear.</p></li>
+called “How to cite” where you want the DOI to appear.</p>
+<ul>
+<li><p>You can also include the DOI in a <a class="reference external" href="https://citation-file-format.github.io/">CFF file</a> in your repository.</p></li>
+<li><p>When the document file you are pasting the DOI into uses Markdown formatting
+— typically indicated by a <code class="docutils literal notranslate"><span class="pre">.md</span></code> file extension — you can paste the DOI as
+a nice clickable badge like this one</p>
+<a class="reference external image-reference" href="https://doi.org/10.5281/zenodo.5501089"><img alt="../_images/zenodo.5501089.svg" src="../_images/zenodo.5501089.svg" /></a>
+<p>by using a Markdown link that can easily be obtained from the DOI by
+formatting it like this:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>[<span class="nt">![DOI</span>](<span class="na">https://zenodo.org/badge/DOI/10.5281/zenodo.5501089.svg</span>)](https://doi.org/10.5281/zenodo.5501089)
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The number <code class="docutils literal notranslate"><span class="pre">5501089</span></code> is from an example DOI and will be different for
+your DOI. The prefix <code class="docutils literal notranslate"><span class="pre">10.5281</span></code> may or may not be different as well.</p>
+</div>
+</li>
+<li><p>Commit and push these changes before making the release.</p></li>
+</ul>
+</li>
 <li><p>Make a release of the repository as per the instructions in the <a class="reference internal" href="#tagging"><span class="std std-ref">Tagging</span></a> or <a class="reference internal" href="#github-gitlab-release-management"><span class="std std-ref">GitHub/GitLab
 Release Management</span></a> sections above.</p></li>
 <li><p>Obtain a ZIP or other archive of the release. When you use GitHub or GitLab
 release management, such an archive is automatically created and downloadable
 from the release page. When you tag releases locally, archive a clean
-worktree corresponding to the release commit, and make sure that the <cite>.git</cite>
-holding the local repository data store is excluded.</p></li>
-<li><p>Proceed as detailed in the prior <a class="reference internal" href="#zenodo-only"><span class="std std-ref">Zenodo only</span></a> section, and upload
-the archive in step 4.</p></li>
+worktree corresponding to the release commit, and make sure that the <code class="docutils literal notranslate"><span class="pre">.git</span></code>
+hidden directory holding the local repository data store is excluded.</p></li>
+<li><p>Return to the Zenodo web form and upload the archive.</p></li>
+<li><p>Complete the metadata fields.</p>
+<ul class="simple">
+<li><p>Include a URL pointing to the Git repository or its release page.</p></li>
+</ul>
+</li>
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">Publish</span></code>.</p></li>
 </ol>
-</section>
-<section id="automatic-zenodo-upload-of-github-release">
-<h3>Automatic Zenodo upload of GitHub release<a class="headerlink" href="#automatic-zenodo-upload-of-github-release" title="Permalink to this heading"></a></h3>
-<p>When releasing on GitHub, you can use the <a class="reference external" href="https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content#issuing-a-persistent-identifier-for-your-repository-with-zenodo">Zenodo-GitHub integration</a>
-to automatically archive your GitHub releases on Zenodo and create a new Zenodo
-DOI for each release.</p>
-</section>
-<section id="updating-zenodo-releases">
-<h3>Updating Zenodo releases<a class="headerlink" href="#updating-zenodo-releases" title="Permalink to this heading"></a></h3>
-<p>Zenodo allows you to issue a new versions of your research output as updates
-under the same record. This is called <a class="reference external" href="https://blog.zenodo.org/2017/05/30/doi-versioning-launched/">DOI versioning</a>. Zenodo
-generates a DOI for the entire series of versions, and also specific DOIs for
-each version. See the <a class="reference external" href="https://help.zenodo.org/#versioning">DOI versioning FAQ</a> for details.</p>
 </section>
 </section>
 </section>

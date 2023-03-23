@@ -33,7 +33,7 @@
             <img src="../_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v2023-3-20
+                v2023-3-23
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -195,38 +195,32 @@ collaborator. The ForestNavigator <a class="reference internal" href="../it-infr
 supports Git LFS. GitHub also supports Git LFS, but the service is not for free
 and quite expensive. You institutional Git server (if extant) may or may not
 support LFS. Check with your IT department.</p>
+<p>See also the discussion of <a class="reference internal" href="taming-git.html#partial-clone-functionality"><span class="std std-ref">Git’s partial clone functionality</span></a>.</p>
 </section>
 <section id="collaborate-with-colleagues-and-release-on-github-or-gitlab">
 <h2>Collaborate with colleagues and release on GitHub or GitLab<a class="headerlink" href="#collaborate-with-colleagues-and-release-on-github-or-gitlab" title="Permalink to this heading"></a></h2>
 <a class="reference internal image-reference" href="../_images/release_on_GitHub.svg"><img alt="../_images/release_on_GitHub.svg" class="align-center" src="../_images/release_on_GitHub.svg" width="390" /></a>
 <p>A public GitHub repository can be used to <strong>release</strong> an open-source code base
-or open-access dataset. For publishing large data, a public repository on the
-ForestNavigator <a class="reference internal" href="../it-infrastructure.html#gitlab"><span class="std std-ref">GitLab instance</span></a> can be used via <a class="reference external" href="https://docs.gitlab.com/ee/topics/git/lfs/">Git
-LFS</a>.</p>
-<p>Protecting privacy-sensitive or proprietary information is one reason to publish
-only a subset, keeping the sensitive information in an institutional repository.
-Performance can be another reason: since the institutional repository is
-on-premises, mundane operations on the repository will be relatively fast
-without using up Internet uplink bandwidth. By selectively pushing a release
-branch in your institution’s Git repository onto the GitHub repository, you can
-manage what gets made public as a new release and when.</p>
+or open-access dataset. For publishing large data, release onto a Large File
+Store enabled <a class="reference external" href="https://docs.gitlab.com/ee/topics/git/lfs/">Git LFS</a> public
+repository on the ForestNavigator <a class="reference internal" href="../it-infrastructure.html#gitlab"><span class="std std-ref">GitLab instance</span></a>.</p>
+<p>In the diagram above, the user on the left is the <a class="reference internal" href="release-management.html#release-manager"><span class="std std-ref">release manager</span></a>. See the <a class="reference internal" href="release-management.html#release-github-gitlab"><span class="std std-ref">discussion of GitHub/GitLab release management</span></a> for further details.</p>
 </section>
 <section id="release-on-github-and-zenodo">
 <h2>Release on GitHub and Zenodo<a class="headerlink" href="#release-on-github-and-zenodo" title="Permalink to this heading"></a></h2>
 <a class="reference internal image-reference" href="../_images/release_on_GitHub_and_Zenodo.svg"><img alt="../_images/release_on_GitHub_and_Zenodo.svg" class="align-center" src="../_images/release_on_GitHub_and_Zenodo.svg" width="380" /></a>
-<p>By making use of the <a class="reference internal" href="../it-infrastructure.html#zenodo"><span class="std std-ref">GitHub-Zenodo integration</span></a>
-you can release on GitHub and Zenodo simultaneously and make your release
-findable and DOI citable.</p>
+<p>By making use of the <a class="reference internal" href="release-management.html#zenodo-github"><span class="std std-ref">Zenodo GitHub integration</span></a> you can
+release on GitHub and Zenodo simultaneously and make your release findable and
+DOI citable.</p>
 </section>
 <section id="release-on-gitlab-github-and-zenodo">
 <h2>Release on GitLab, GitHub, and Zenodo<a class="headerlink" href="#release-on-gitlab-github-and-zenodo" title="Permalink to this heading"></a></h2>
 <a class="reference internal image-reference" href="../_images/release_on_GitLab_GitHub_and_Zenodo.svg"><img alt="../_images/release_on_GitLab_GitHub_and_Zenodo.svg" class="align-center" src="../_images/release_on_GitLab_GitHub_and_Zenodo.svg" width="450" /></a>
-<p>By making use of the <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">Git submodules feature</a> and the
-<a class="reference internal" href="../it-infrastructure.html#zenodo"><span class="std std-ref">GitHub-Zenodo integration</span></a> you can release on
-GitHub and Zenodo while referencing via a submodule a specific release of large
-data hosted on the ForestNavigator <a class="reference internal" href="../it-infrastructure.html#gitlab"><span class="std std-ref">GitLab instance</span></a>.
-The large data effectively becomes part of a GitHub-Zenodo release, by
-reference.</p>
+<p>By making use of the <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">Git submodules feature</a> and the <a class="reference internal" href="release-management.html#zenodo-github"><span class="std std-ref">Zenodo
+GitHub integration</span></a> you can release on GitHub and Zenodo while
+referencing via a submodule a specific release of large data in a <a class="reference external" href="https://docs.gitlab.com/ee/topics/git/lfs/">Git LFS</a> repository hosted on the
+ForestNavigator <a class="reference internal" href="../it-infrastructure.html#gitlab"><span class="std std-ref">GitLab instance</span></a>. The large data
+effectively becomes part of a GitHub-Zenodo release, by reference.</p>
 </section>
 <section id="forking-and-pull-requests">
 <span id="index-2"></span><h2>Forking and Pull Requests<a class="headerlink" href="#forking-and-pull-requests" title="Permalink to this heading"></a></h2>
