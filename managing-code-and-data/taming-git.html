@@ -33,7 +33,7 @@
             <img src="../_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v2023-3-23
+                v2023-3-30
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -75,6 +75,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../it-infrastructure.html">IT Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../containers.html">Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../containerization.html">Containerization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary</a></li>
 </ul>
 
    <p class="caption">
@@ -314,10 +318,11 @@ Internet. The reason is that Git repositories contain the complete history of
 all files, and this complete history is by default downloaded when running the
 Git <strong>clone</strong> command.</p>
 <p>Fortunately, Git supports <a class="reference external" href="https://docs.gitlab.com/ee/topics/git/partial_clone.html">partial clone functionality</a> that downloads
-only a subset of the files, and checks out the remaining files as needed.</p>
+only a subset of the files, and downloads further files only as needed on
+<strong>checkout</strong>.</p>
 </section>
 <section id="graphical-interfaces">
-<h2>Graphical interfaces<a class="headerlink" href="#graphical-interfaces" title="Permalink to this heading"></a></h2>
+<span id="index-13"></span><h2>Graphical interfaces<a class="headerlink" href="#graphical-interfaces" title="Permalink to this heading"></a></h2>
 <p>Most integrated development environments and many code editors allow you to
 perform Git operations via menus or buttons. For example, the image below shows
 the Git menu of Visual Studio Code.</p>

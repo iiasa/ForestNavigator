@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workflows &mdash; ForestNavigator  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Summary" href="../summary.html" />
+    <link rel="prev" title="Development and Testing vs Production" href="development-and-testing-vs-production.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #C8C8C8" >
+            <a href="../index.html">
+            <img src="../_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2023-3-30
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+   
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../it-infrastructure.html">IT Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../containers.html">Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../containerization.html">Containerization</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../deployment.html">Deployment</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="composition-and-orchestration.html">Composition and Orchestration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development-and-testing-vs-production.html">Development and Testing vs Production</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#from-source">From source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-push-pull-run">Build, Push, Pull, Run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commit-to-repo-build-and-deploy-via-ci-cd">Commit to repo, build and deploy via CI/CD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kubernetes-deployment">Kubernetes Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#project-kubernetes-deployment-guidelines">ForestNavigator Kubernetes Deployment Guidelines</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary</a></li>
+</ul>
+
+   <p class="caption">
+     <span class="caption-text">References:</span>
+   </p>
+   <ul>
+        <li class="toctree-l1"><a href= "../genindex.html">Index</a></li>
+   </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #C8C8C8" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ForestNavigator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../deployment.html">Deployment</a></li>
+      <li class="breadcrumb-item active">Workflows</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="workflows">
+<span id="index-0"></span><h1>Workflows<a class="headerlink" href="#workflows" title="Permalink to this heading"></a></h1>
+<p>Below, <strong>deployment workflows</strong> suited for various use cases are depicted graphically and
+discussed briefly.</p>
+<section id="from-source">
+<h2>From source<a class="headerlink" href="#from-source" title="Permalink to this heading"></a></h2>
+<a class="reference internal image-reference" href="../_images/Harbor_logo.png"><img alt="../_images/Harbor_logo.png" class="align-center" src="../_images/Harbor_logo.png" style="width: 200px;" /></a>
+<p>One way to deploy is to send over the source code to the remote
+deployment machine, build the software and container there, and then
+start the container. However, doing so requires having sufficient rights
+on the deployment machine, and having all the necessary build tooling
+installed there. This may work if you fully control and administer the
+deployment machine, but even then it is not desirable to “pollute” the
+deployment environment with the development tooling needed to build
+containers. And in the case of ForestNavigator, there are multiple
+deployment machines and multiple teams in need of deploying their
+containerized software. Hence a more formal deployment workflow is
+necessary.</p>
+</section>
+<section id="build-push-pull-run">
+<h2>Build, Push, Pull, Run<a class="headerlink" href="#build-push-pull-run" title="Permalink to this heading"></a></h2>
+<p>A basic workflow enabled by containerization involves the development
+and testing of a containerized application on a local development
+machine until it is ready for deployment. Then:</p>
+<ol class="arabic simple">
+<li><p>A release version of the container image is built and tagged on the local
+development machine.</p></li>
+<li><p>The image is pushed to an container registry that both the development
+machine and deployment machine (or cluster) have access to.</p></li>
+<li><p>The image is pulled from the container registry to the deployment machine.</p></li>
+<li><p>On the deployment machine, the image is run as a container, possibly updating
+an older version of the container that is stopped first.</p></li>
+</ol>
+<p>In this manner, the deployed containerized software can be updated on a
+container-by-container basis provided that some attention has been given
+to loosely coupling collaborating containers, for example by allowing
+for and reconnecting to a temporarily unavailable service.</p>
+<p>Reproducibility of building and running the image can be promoted by
+using image build scripts and Docker compose files or Kubernetes
+resources, but even then some degree of manual intervention is required
+that could lead to irreproducible results.</p>
+</section>
+<section id="commit-to-repo-build-and-deploy-via-ci-cd">
+<h2>Commit to repo, build and deploy via CI/CD<a class="headerlink" href="#commit-to-repo-build-and-deploy-via-ci-cd" title="Permalink to this heading"></a></h2>
+<p>A more robust workflow automates the whole process from image building
+to container deployment. This can be done with Continuous Integration
+and Continuous Deployment (CI/CD) tooling such as <a class="reference external" href="https://docs.gitlab.com/ee/ci/">GitLab
+CI/CD</a>, or <a class="reference external" href="https://docs.github.com/en/actions">GitHub
+Actions</a>. Such tooling allows
+actions to be scripted that automate the build, push and pull steps, and
+possibly automate testing steps. CI/CD scripts are usually associated
+with a source code repository, and the scripts can be triggered by
+configurable events. For example, by using a repository commit event as
+a trigger, tests can be run automatically whenever source code changes
+are committed to the repository.</p>
+</section>
+<section id="kubernetes-deployment">
+<h2>Kubernetes Deployment<a class="headerlink" href="#kubernetes-deployment" title="Permalink to this heading"></a></h2>
+<p>Kubernetes can automate the pulling of images and the running of containers
+based on those images. This is orchestrated via a <code class="docutils literal notranslate"><span class="pre">Deployment</span></code> object whose
+configuration describes the desired state of a collection of containers.
+Kubernetes will strive to maintain this desired state. Depending on the policy
+specified in the configuration, updated images may or may not be automatically
+pulled from a container registry, and the running of containers can also occur
+automatically so as to establish or re-establish the configured desired state.</p>
+<p>Fortunately, the ForestNavigator Kubernetes configuration is taken care of by
+specialized administrators. The important takeaway here is that the final steps
+in the deployment — the pulling of your image(s) onto the Kubernetes cluster and
+the instantiation and running of those images as containers — is a function of
+the ForestNavigator-specific Kubernetes configuration that the administrators have
+established, and therefore requires ForestNavigator-specific guidelines.</p>
+</section>
+<section id="project-kubernetes-deployment-guidelines">
+<h2>ForestNavigator Kubernetes Deployment Guidelines<a class="headerlink" href="#project-kubernetes-deployment-guidelines" title="Permalink to this heading"></a></h2>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Add K8s deployment guidelines and workflows with diagrams.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="development-and-testing-vs-production.html" class="btn btn-neutral float-left" title="Development and Testing vs Production" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../summary.html" class="btn btn-neutral float-right" title="Summary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Albert Brouwer, IIASA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Containers &mdash; ForestNavigator  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Containerization" href="containerization.html" />
+    <link rel="prev" title="IT Infrastructure" href="it-infrastructure.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #C8C8C8" >
+            <a href="index.html">
+            <img src="_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2023-3-30
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+   
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="managing-code-and-data.html">Managing Code and Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="it-infrastructure.html">IT Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Containers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#container-technologies">Container technologies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#exploring-docker">Exploring Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#advantages">Advantages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-configurable-stack">A configurable stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#on-demand-availability">On-demand availability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sharing-resources-without-stepping-on-each-other-s-toes">Sharing resources without stepping on each other’s toes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#portability-and-sharing">Portability and sharing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reproducibility">Reproducibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#easier-testing">Easier testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#efficiency">Efficiency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security">Security</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="containerization.html">Containerization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+
+   <p class="caption">
+     <span class="caption-text">References:</span>
+   </p>
+   <ul>
+        <li class="toctree-l1"><a href= "genindex.html">Index</a></li>
+   </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #C8C8C8" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ForestNavigator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Containers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="containers">
+<h1>Containers<a class="headerlink" href="#containers" title="Permalink to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>The ForestNavigator models, front ends, and back ends are very diverse. By
+deploying each in a customized container, they can run without interference,
+have their custom requirements catered for, while still being able to
+communicate and share resources in a well-managed manner.</p>
+<p id="index-0"><strong>Containers</strong> are software components that from the “inside” look like a
+regular computer that runs an operating system and other basic software as
+required by a model or app. Any software that can be installed on a regular
+computer can therefore readily be adapted to run inside a container. A
+configurable amount of memory and storage is allocated to a container. From the
+“outside” — instead of having a screen, keyboard, and a network cable — a
+container is dynamically connected via software to other containers, shared
+resources, and where needed the Internet.</p>
+<p>For an example of collaborative modeling via containerized models, see
+the <a class="reference external" href="https://pecanproject.github.io/pecan-documentation/master/model-docker.html#model-docker">PEcAn
+project</a>.</p>
+</section>
+<section id="container-technologies">
+<h2>Container technologies<a class="headerlink" href="#container-technologies" title="Permalink to this heading"></a></h2>
+<p>Several software container technologies exist. Each of these fills a somewhat
+different niche of the software ecosystem. This guide will refrain from going
+into the specifics of particular container technologies and instead discusses
+containers from a general and conceptual perspective. The reader is advised to
+supplement this reading with documentation or training material specific to the
+chosen technology.</p>
+<section id="exploring-docker">
+<span id="index-1"></span><h3>Exploring Docker<a class="headerlink" href="#exploring-docker" title="Permalink to this heading"></a></h3>
+<a class="reference external image-reference" href="https://en.wikipedia.org/wiki/Docker_(software)"><img alt="_images/Docker_logo.png" class="align-right" src="_images/Docker_logo.png" style="width: 100px;" /></a>
+<p>For ForestNavigator,
+<a class="reference external" href="https://en.wikipedia.org/wiki/Docker_(software)">Docker</a> is the
+container technology most likely to be fit-for-purpose. Docker is
+somewhat of a de-facto standard. You can learn more about Docker
+specifically, and set up some tooling for trying it out, by exploring
+the following:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.docker.com/get-docker/">Download and install</a></p></li>
+<li><p><a class="reference external" href="https://docs.docker.com/">Docker documentation portal</a></p></li>
+<li><p><a class="reference external" href="https://docs.docker.com/glossary/">Glossary</a></p></li>
+</ul>
+</section>
+</section>
+<section id="advantages">
+<span id="index-2"></span><h2>Advantages<a class="headerlink" href="#advantages" title="Permalink to this heading"></a></h2>
+<p>Deploying software in containers has many advantages that taken together
+make it the deployment method of choice for ForestNavigator. In a nutshell,
+with a containerized approach many of the problems that one runs in to
+when constructing a complex multi-component software system can be dealt
+with at an abstracted outside-the-container level using preexisting
+tooling. Below, the advantages are listed in a bit more detail and
+placed in a ForestNavigator context.</p>
+<section id="a-configurable-stack">
+<span id="index-3"></span><h3>A configurable stack<a class="headerlink" href="#a-configurable-stack" title="Permalink to this heading"></a></h3>
+<p>Installing software that depends on much underlying software — as models
+typically do — involves first installing a <strong>software stack</strong> of dependencies:
+operating system, required libraries, packages, and so on. Doing so the
+classical way involves manually downloading and running installers. This
+takes much effort and is likely to lead to irreproducible results unless
+versions are carefully managed. Containers allow for configuration of
+the stack and automation of its installation in a manner that is
+reproducible. When configuring a stack, you can start from a base
+container image that already has most of what you need. Many free-to-use
+base images for all kinds of stacks are available. This saves a lot of
+time.</p>
+</section>
+<section id="on-demand-availability">
+<h3>On-demand availability<a class="headerlink" href="#on-demand-availability" title="Permalink to this heading"></a></h3>
+<p>Once configured and installed, a container image results. A container image is
+akin to a template or blueprint from which a container can be instantiated when
+needed, and as many times as needed. Therefore, a container does not need to
+consume memory or processing resources until needed. Also, multiple copies of
+software deployed in the container can easily be run, each with its own private
+state. For example, an additional copy of a model container can be instantiated
+when a user connects to the ForestNavigator infrastructure.</p>
+</section>
+<section id="sharing-resources-without-stepping-on-each-other-s-toes">
+<h3>Sharing resources without stepping on each other’s toes<a class="headerlink" href="#sharing-resources-without-stepping-on-each-other-s-toes" title="Permalink to this heading"></a></h3>
+<p>Containers deployed on the same cluster can share resources while still
+providing isolated environments. This avoids the kind of conflicts that
+often occur when installing everything together. These include:</p>
+<ul class="simple">
+<li><p><strong>Dependency conflicts:</strong> software to be installed may require a
+software stack (operating system, libraries, language run times, …)
+that is incompatible with the requirements of already-installed
+software.</p></li>
+<li><p><strong>Update side effects:</strong> updating software or its dependencies can
+break other installed software.</p></li>
+<li><p><strong>Resource exhaustion:</strong> one application can make other applications
+fail by using up all memory or disk.</p></li>
+</ul>
+</section>
+<section id="portability-and-sharing">
+<h3>Portability and sharing<a class="headerlink" href="#portability-and-sharing" title="Permalink to this heading"></a></h3>
+<p>A container image can be transferred like a file or stored in and
+retrieved from a container registry (such as <a class="reference external" href="https://hub.docker.com/">Docker
+Hub</a>). This makes containers portable, for
+example from the local computer of a researcher or developer to the
+ForestNavigator Kubernetes cluster. It removes the need for elaborating
+installation instructions or building an installer since the software is
+pre-installed in the container.</p>
+</section>
+<section id="reproducibility">
+<h3>Reproducibility<a class="headerlink" href="#reproducibility" title="Permalink to this heading"></a></h3>
+<p>Once built, the content of a container image does not change. Every time
+and everywhere you instantiate a container from an image, you will run
+the exact same versions of the exact same stack of dependencies with the
+exact same version of your software component sitting on top. This makes
+the running of components deployed in containers much more reproducible
+than is the case when installing directly on the operating system of
+multiple computers, or even when installing on a single computer that is
+subject to ongoing upgrades and maintenance.</p>
+</section>
+<section id="easier-testing">
+<h3>Easier testing<a class="headerlink" href="#easier-testing" title="Permalink to this heading"></a></h3>
+<p>The researcher or developer can test software on a personal machine, but
+running inside a container that provides the exact same environment in
+which the software will be deployed so that:</p>
+<ul class="simple">
+<li><p>There can be no mismatches between the test environment and the
+production environment that invalidate the test results.</p></li>
+<li><p>The host environment of the personal machine does not need to have
+all the dependencies of the software being developed installed, or
+incompatible versions uninstalled, for tests to be run.</p>
+<ul>
+<li><p>This is particularly convenient when working on multiple projects
+each with their own specific set of dependencies.</p></li>
+</ul>
+</li>
+<li><p>Portability of containers allows collaborators to use the very same
+test environment.</p></li>
+</ul>
+<p>In addition, once you have containerized your software it becomes easier
+to set up automated testing such as <a class="reference external" href="https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action">via GitHub
+Actions</a>.</p>
+</section>
+<section id="efficiency">
+<h3>Efficiency<a class="headerlink" href="#efficiency" title="Permalink to this heading"></a></h3>
+<p>Containers by design re-use existing resources and operating system
+facilities. This allows a new container to be quickly created and
+started while using little additional memory and storage as compared to
+setting up an new physical or virtual machine.</p>
+</section>
+<section id="security">
+<h3>Security<a class="headerlink" href="#security" title="Permalink to this heading"></a></h3>
+<p>When software running inside a container is compromised, the damage is
+limited to the container: escaping from a container is hard. Deploying
+software in a container is sufficient to keep most software compromises
+contained.</p>
+<p>Web apps such as those planned for ForestNavigator are continually exposed to
+attacks from the Internet. But models too might be vulnerable, for example by
+relying on a dependency that — typically at a later stage — is found to have an
+exploitable weakness.</p>
+<p>To protect the IT infrastructure of the hosting organization and the
+reputation of the ForestNavigator consortium, deploying in containers is
+pretty much mandatory from a security perspective.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="it-infrastructure.html" class="btn btn-neutral float-left" title="IT Infrastructure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="containerization.html" class="btn btn-neutral float-right" title="Containerization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Albert Brouwer, IIASA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

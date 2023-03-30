@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Composition and Orchestration &mdash; ForestNavigator  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Development and Testing vs Production" href="development-and-testing-vs-production.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #C8C8C8" >
+            <a href="../index.html">
+            <img src="../_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2023-3-30
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+   
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../it-infrastructure.html">IT Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../containers.html">Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../containerization.html">Containerization</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../deployment.html">Deployment</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Composition and Orchestration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#docker-compose">Docker Compose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kubernetes">Kubernetes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#kompose">Kompose</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="development-and-testing-vs-production.html">Development and Testing vs Production</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary</a></li>
+</ul>
+
+   <p class="caption">
+     <span class="caption-text">References:</span>
+   </p>
+   <ul>
+        <li class="toctree-l1"><a href= "../genindex.html">Index</a></li>
+   </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #C8C8C8" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ForestNavigator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../deployment.html">Deployment</a></li>
+      <li class="breadcrumb-item active">Composition and Orchestration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="composition-and-orchestration">
+<h1>Composition and Orchestration<a class="headerlink" href="#composition-and-orchestration" title="Permalink to this heading"></a></h1>
+<p><a class="reference internal" href="../containerization/images-and-containers.html#one-app-is-good-practice"><span class="std std-ref">As explained earlier</span></a>, ensuring that containers
+hold a single application or service is good practice. But how to use such
+limited-purpose containers to set up a complex system comprised of multiple
+applications, models, and services as is the case for ForestNavigator? This
+requires a means of composing containers into a coherent whole that arranges for
+things such as:</p>
+<ul class="simple">
+<li><p>Which containers instances derived from what images should
+participate.</p></li>
+<li><p>Shared access to file volumes.</p></li>
+<li><p>One or more virtual networks shared between containers.</p></li>
+<li><p>Ensuring that containers providing services are started before
+containers using those services.</p></li>
+<li><p>Ensuring that all containers in a composition can be jointly started
+and stopped.</p></li>
+<li><p>Exposing containers to the Internet, possibly through a
+load-balancer/proxy that itself can occupy a container.</p></li>
+<li><p>…</p></li>
+</ul>
+<p id="index-0"><strong>Container composition</strong> can be thought of as configuring such a
+shared arrangement. <strong>Container orchestration</strong> can be thought of as
+dynamic composition, providing for things such as adding container
+instances as load increases, recovery from failure, and so on.</p>
+<p>Because containers hide the software they contain, the tools used for
+composition and orchestration can be standard and general-purpose: these
+tools only need to know how to handle containers from the “outside”,
+that is, interact with containers through a standard
+<a class="reference external" href="https://en.wikipedia.org/wiki/API">API</a> that is the same for all
+containers. This is analogous to how shipping containers containing any
+kind of goods can be handled by a container crane at a container harbor.</p>
+<section id="docker-compose">
+<span id="index-1"></span><h2>Docker Compose<a class="headerlink" href="#docker-compose" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://docs.docker.com/compose/">Docker Compose</a> is a standard tool for
+composing Docker containers. It is either included in a Docker installation, or
+can be installed as an additional package. Docker Compose is basically an
+alternative to the Docker command line interface. Instead of command parameters,
+Docker Compose takes as input a declarative configuration file that specifies
+how to set up or tear down a collection of containers, their networks, and
+volumes. Docker Compose is limited to managing containers running on a <em>single
+machine</em>. As such, it can help with testing a collection of collaborating
+containers during development and can suffice for simple production deployments
+that are not too demanding.</p>
+</section>
+<section id="kubernetes">
+<span id="index-2"></span><h2>Kubernetes<a class="headerlink" href="#kubernetes" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Kubernetes">Kubernetes</a> is a
+widely-used toolkit for orchestrating containers. It is the deployment
+framework chosen for ForestNavigator. Kubernetes can orchestrate containers
+on <em>multiple machines</em> so that the system can scale beyond what a
+single machine can provide. Also, Kubernetes can dynamically adapt to
+change so that the deployment is robust and responsive. Kubernetes can
+migrate containers amongst machines so as to make the best use of
+available resources. It can even be set up such that a machine can fail
+without causing interruption of service.</p>
+<p id="index-3">Kubernetes is a much more complicated system than Docker Compose.
+Setting it up is a rather involved process. It is therefore not
+recommended to invest the time to manually set up a Kubernetes
+installation on your development machine so as to help with the
+development and testing of multi-container applications. However, there
+are tools that provide Kubernetes in ready-to-go form or that automate
+its installation: some examples are <a class="reference external" href="https://kind.sigs.k8s.io">Kind</a>,
+<a class="reference external" href="https://minikube.sigs.k8s.io/">Minikube</a>,
+<a class="reference external" href="https://docs.k3s.io/">K3s</a>, and also <a class="reference external" href="https://docs.docker.com/desktop/kubernetes/">Docker
+Desktop</a> which includes
+a standalone Kubernetes server and client. This will allow you to
+perform testing of deployment to Kubernetes on your local development
+machine. Also, a managed Kubernetes cluster can be rented from several
+cloud providers.</p>
+<p>Beware though that this is probably overkill for your use case. In case of
+single-container software, you can build and test with Docker alone. In
+case of a simple multi-container application, adding Docker Compose will
+help and be sufficient until the very last deployment step.</p>
+<section id="kompose">
+<span id="index-4"></span><h3>Kompose<a class="headerlink" href="#kompose" title="Permalink to this heading"></a></h3>
+<p>To bridge the gap between Docker Compose and Kubernetes, the
+<a class="reference external" href="https://kubernetes.io/docs/tasks/configure-pod-container/translate-compose-kubernetes/">Kompose</a>
+tool is available. It translates a Docker Compose configuration file to
+Kubernetes Resources.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="development-and-testing-vs-production.html" class="btn btn-neutral float-right" title="Development and Testing vs Production" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Albert Brouwer, IIASA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

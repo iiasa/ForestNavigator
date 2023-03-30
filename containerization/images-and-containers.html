@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Images and Containers &mdash; ForestNavigator  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Files" href="files.html" />
+    <link rel="prev" title="Determining the modality of execution" href="determining-the-modality-of-execution.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #C8C8C8" >
+            <a href="../index.html">
+            <img src="../_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2023-3-30
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+   
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../it-infrastructure.html">IT Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../containers.html">Containers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../containerization.html">Containerization</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="determining-the-modality-of-execution.html">Determining the modality of execution</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Images and Containers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#images">Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#containers">Containers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#technical-background">Technical background</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#practical-perspective">Practical perspective</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#environment-only-containers">Environment-only containers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="files.html">Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networking.html">Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces.html">Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary</a></li>
+</ul>
+
+   <p class="caption">
+     <span class="caption-text">References:</span>
+   </p>
+   <ul>
+        <li class="toctree-l1"><a href= "../genindex.html">Index</a></li>
+   </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #C8C8C8" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ForestNavigator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../containerization.html">Containerization</a></li>
+      <li class="breadcrumb-item active">Images and Containers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="images-and-containers">
+<h1>Images and Containers<a class="headerlink" href="#images-and-containers" title="Permalink to this heading"></a></h1>
+<section id="images">
+<span id="index-0"></span><h2>Images<a class="headerlink" href="#images" title="Permalink to this heading"></a></h2>
+<p>Images are <em>read-only templates</em> for containers. They contain the
+software to be containerized (an application, model, service, or
+otherwise) as well as the underlying <em>stack of dependencies</em>
+(operating system, language runtime, libraries, and so on) that together
+comprise the environment required by the software. Images cannot be run,
+instead they have to be instantiated and executed as containers.</p>
+<p id="build-script">Images are built up based on instructions in a <strong>build script</strong>. For
+Docker containers the build script is called a
+“<a class="reference external" href="https://docs.docker.com/engine/reference/builder/">Dockerfile</a>”.
+Writing a build script is therefore central to containerization.</p>
+<p id="index-1">A built image can be stored and distributed as a file, or shared via an
+<strong>container registry</strong> such as <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>. When
+instead sharing your software as source code, include the build script
+so as to enable others to easily build and customize their own image and
+deploy your software in a container.</p>
+<p id="index-2">Images are built up incrementally by adding <strong>layers</strong> to the stack via the
+build script. Image building can therefore start from a <strong>base image</strong>
+in which several of the necessary layers are already present. A vast
+collection of images can be obtained from public image registries. A
+typical starting point is a base image containing an operating system
+and language runtime suitable for supporting your software.</p>
+<a class="reference internal image-reference" href="../_images/base_image.svg"><img alt="../_images/base_image.svg" src="../_images/base_image.svg" width="800" /></a>
+<div class="admonition warning" id="index-3">
+<p class="admonition-title">Warning</p>
+<p>A base image pulled from a public container registry might be compromised.
+For security, prefer well-vetted <strong>official images</strong>. For example, official
+images containing a Python runtime can be found <a class="reference external" href="https://hub.docker.com/_/python">here on Docker Hub</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By carefully selecting specific versions for the base image and further
+layers, a build script can be made reproducible in the sense that it results
+in a functionally identical container image every time that it is used to
+create an image.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The Docker build system has added support for <a class="reference external" href="https://docs.docker.com/build/building/multi-stage/">multi-stage builds</a>. This enables more
+flexible yet maintainable builds.</p>
+</div>
+</section>
+<section id="containers">
+<span id="index-4"></span><h2>Containers<a class="headerlink" href="#containers" title="Permalink to this heading"></a></h2>
+<section id="technical-background">
+<h3>Technical background<a class="headerlink" href="#technical-background" title="Permalink to this heading"></a></h3>
+<p id="index-5">Containers are instances of images. They can be started, stopped,
+re-started, and destroyed. To make this possible, a <strong>read-write layer</strong> is
+added on top of the read-only image.</p>
+<a class="reference internal image-reference" href="../_images/container_layers.svg"><img alt="../_images/container_layers.svg" class="align-center" src="../_images/container_layers.svg" width="600" /></a>
+<p>From a single image, multiple containers can be instantiated and started
+in parallel, but each with a separate read-write layer. Containers
+therefore run in isolation by default: they do not share the dynamic
+state contained in the read-write layer. This requires only a single
+copy of the image because instead of including the image that they are
+instantiated from, containers reference the image. Therefore, though the
+above graphic provides a good illustration of what a container image is
+conceptually, the technical reality is more accurately represented as
+follows:</p>
+<a class="reference internal image-reference" href="../_images/container_instances.svg"><img alt="../_images/container_instances.svg" class="align-center" src="../_images/container_instances.svg" width="800" /></a>
+</section>
+<section id="practical-perspective">
+<h3>Practical perspective<a class="headerlink" href="#practical-perspective" title="Permalink to this heading"></a></h3>
+<p>Though it is important to understand the technical background of how
+containers are built up and instantiated, for everyday use it is helpful
+to take a more practical perspective. A container is effectively an
+isolated environment that provides for the needs of an application or
+service. The environment is comprised of an operating system and other
+dependencies, such as libraries and language runtime, together with
+their dynamic state (in the read/write layer).</p>
+<a class="reference internal image-reference" href="../_images/environment.svg"><img alt="../_images/environment.svg" class="align-center" src="../_images/environment.svg" width="550" /></a>
+<p>The application is installed inside the container on top of this
+environment. Therefore, in practical terms, <strong>a container contains an
+application (or service) and its environment</strong>, at least for the common
+use case.</p>
+<a class="reference internal image-reference" href="../_images/environment_and_application.svg"><img alt="../_images/environment_and_application.svg" class="align-center" src="../_images/environment_and_application.svg" width="350" /></a>
+<p id="one-app-is-good-practice">It is of course possible to install multiple applications in a container. Doing
+so would reduce the benefits of containerization: by sharing a container, the
+applications are no longer isolated, which makes their interactions harder to
+formalize and manage. It is therefore good practice to have only one application
+or service per container instead of multiple.</p>
+<a class="reference internal image-reference" href="../_images/multiple_apps.svg"><img alt="../_images/multiple_apps.svg" class="align-center" src="../_images/multiple_apps.svg" width="350" /></a>
+</section>
+<section id="environment-only-containers">
+<span id="index-6"></span><h3>Environment-only containers<a class="headerlink" href="#environment-only-containers" title="Permalink to this heading"></a></h3>
+<p>During development and testing, containers can even be useful when
+holding just an environment. For example, by instantiating a container
+from a downloaded image that provides a particular version of a language
+runtime, you can use the practical facilities of that language
+environment such as its
+<a class="reference external" href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a>
+and package manager without directly installing the language runtime on
+your machine.</p>
+<a class="reference internal image-reference" href="../_images/environment_only.svg"><img alt="../_images/environment_only.svg" class="align-center" src="../_images/environment_only.svg" width="350" /></a>
+<p>This can be convenient for a number of reasons:</p>
+<ul class="simple">
+<li><p>Pulling a container image from a public container registry is faster than
+doing a regular installation.</p></li>
+<li><p>The environment is pre-configured and ready to go: no need to set
+environment variables and so on.</p></li>
+<li><p>You can use incompatible versions of a particular environment
+side-by-side on the same machine without conflicts.</p></li>
+<li><p>You can be sure that the container can modify only the parts of the
+host filesystem that you give it access to.</p></li>
+<li><p>The container and image can speedily be removed without leaving
+leftovers.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="determining-the-modality-of-execution.html" class="btn btn-neutral float-left" title="Determining the modality of execution" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="files.html" class="btn btn-neutral float-right" title="Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Albert Brouwer, IIASA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
