@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Files &mdash; ForestNavigator  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Networking" href="networking.html" />
+    <link rel="prev" title="Configuration" href="configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #C8C8C8" >
+            <a href="../index.html">
+            <img src="../_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2023-4-21
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+   
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../containerization.html">Containerization</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images-and-containers.html">Images and Containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advantages.html">Advantages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical_background.html">Technical background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#internal-filesystem">Internal filesystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-external-files-volumes">Accessing external files: volumes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-container-files-from-the-host">Accessing container files from the host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="networking.html">Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces.html">Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="determining-the-modality-of-execution.html">Determining the modality of execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../IT-infrastructure.html">IT Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary</a></li>
+</ul>
+
+   <p class="caption">
+     <span class="caption-text">References:</span>
+   </p>
+   <ul>
+        <li class="toctree-l1"><a href= "../genindex.html">Index</a></li>
+   </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #C8C8C8" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ForestNavigator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../containerization.html">Containerization</a></li>
+      <li class="breadcrumb-item active">Files</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="files">
+<h1>Files<a class="headerlink" href="#files" title="Permalink to this heading"></a></h1>
+<p>When containerizing software, it is important to have a good understanding of
+how containers handle files. This page introduces the concepts that you need to
+be familiar with.</p>
+<section id="internal-filesystem">
+<span id="index-0"></span><h2>Internal filesystem<a class="headerlink" href="#internal-filesystem" title="Permalink to this heading"></a></h2>
+<p>Containers are provided with an <strong>internal filesystem</strong> that holds the
+union of the files and directories added by the layers from which the
+container has been built up, with higher layers taking precedence over
+lower layers. This union appears to the software running in the
+container as a single filesystem. The read-write layer makes it possible
+to write, overwrite, or delete files in this internal union filesystem.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When a container is stopped, the state of its internal filesystem is retained
+so that the files are available again when the container is restarted.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When a container deletes or overwrites a file provided by a layer in its
+image, the image remains unchanged since it is read-only: the existence or
+content of the original file is merely masked by the container’s internal
+union filesystem, only the read-write layer is modified.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When a container is destroyed, any data written to its internal filesystem is
+lost.</p>
+</div>
+</section>
+<section id="accessing-external-files-volumes">
+<span id="file-volumes"></span><h2>Accessing external files: volumes<a class="headerlink" href="#accessing-external-files-volumes" title="Permalink to this heading"></a></h2>
+<p>Since containers are isolated by default, they cannot access files
+external to the container unless such access is explicitly granted.
+Configuring such access involves specifying a directory path in the
+container’s filesystem where the external file tree should appear. Such
+a mapping to an external file tree is typically referred to as a
+<strong>volume</strong>.</p>
+<p>Depending on the container technology, several kinds of volume may be
+available. We list the main ones here with some example use cases:</p>
+<ul class="simple">
+<li><p>A read-only “<a class="reference internal" href="../deployment/development-and-testing-vs-production.html#bind-mount"><span class="std std-ref">bind mount</span></a>” of a file tree on a host-side
+filesystem.</p>
+<ul>
+<li><p>To make updated files available to a container after its image has
+been built.</p></li>
+<li><p>To make files available to a started container from the host side.</p>
+<ul>
+<li><p>For example, to allow convenient reconfiguration of running
+container software by modifying files on the host side. This is
+particularly useful for exploratory testing of containerized
+software.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>A read-write “<a class="reference internal" href="../deployment/development-and-testing-vs-production.html#bind-mount"><span class="std std-ref">bind mount</span></a>” of a file tree on a host-side
+filesystem.</p>
+<ul>
+<li><p>To allow containers to interact through file I/O while allowing
+for easy host-side inspection.</p></li>
+<li><p>To communicate result data back to the host side.</p></li>
+</ul>
+</li>
+<li><p>A named volume managed by the container engine or orchestrator.</p>
+<ul>
+<li><p>To allow container state to survive container destruction and
+replacement with an updated version.</p></li>
+<li><p>To allow containers to interact through file I/O.</p></li>
+</ul>
+</li>
+<li><p>An anonymous per-container volume managed by the container engine or
+orchestrator such that the volume is created when the container is
+instantiated and destroyed when the container is destroyed.</p>
+<ul>
+<li><p>To improve performance for file trees with heavy file I/O.</p>
+<ul>
+<li><p>Since host-side file systems tend to have less overhead.</p></li>
+</ul>
+</li>
+<li><p>To override a sub tree of a bind mount with container-private
+files.</p>
+<ul>
+<li><p>This requires the anonymous volume to be mapped last.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="accessing-container-files-from-the-host">
+<h2>Accessing container files from the host<a class="headerlink" href="#accessing-container-files-from-the-host" title="Permalink to this heading"></a></h2>
+<p>In particular during development, it can be useful to have access to
+container files from the host side. For example, to inspect a container
+log file to verify whether a container is functioning as expected. Means
+exist to “attach” to a container so as to gain a command line from which
+to interactively inspect the inside. For Docker, this is done via the
+<a class="reference external" href="https://docs.docker.com/engine/reference/commandline/attach/">attach command</a>.
+Also, means are provided for copying files into and out of a container.
+For example the Docker <a class="reference external" href="https://docs.docker.com/engine/reference/commandline/cp/">cp command</a>.</p>
+<p>In addition, a bit of the host filesystem can be mapped into a container
+via “bind mounts” as noted in the previous section. This allows
+container-visible files to be easily viewed and modified on the host
+side. For some programming languages, it is even possible to set up live
+source code updates such that any changed source files are automatically
+picked up by the running container, thereby speeding up exploratory
+development and testing by avoiding the need to rebuild and restart the
+container.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>For security and robustness, these mechanisms should be disabled when
+the container is deployed in production.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="configuration.html" class="btn btn-neutral float-left" title="Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="networking.html" class="btn btn-neutral float-right" title="Networking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Albert Brouwer, IIASA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Version Control &mdash; ForestNavigator  documentation</title>
+  <title>Introduction &mdash; ForestNavigator  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The Git ecosystem" href="the-git-ecosystem.html" />
-    <link rel="prev" title="Introduction" href="introduction.html" /> 
+    <link rel="next" title="GitHub" href="GitHub.html" />
+    <link rel="prev" title="IT Infrastructure" href="../IT-infrastructure.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,25 +46,14 @@
    
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Version Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="the-git-ecosystem.html">The Git ecosystem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="workflows.html">Workflows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="FAIR-principles.html">FAIR principles, formats, and reproducibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation.html">Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="understanding-git.html">Understanding Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="taming-git.html">Taming Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="specialized-data-stores.html">Specialized Data Stores</a></li>
-<li class="toctree-l2"><a class="reference internal" href="release-management.html">Release Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="good-practices-example.html">Good practices example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="go-with-the-flow.html">Go with the flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../IT-infrastructure.html">IT Infrastructure</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GitHub.html">GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GitLab.html">GitLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zenodo.html">Zenodo</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../containerization.html">Containerization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../IT-infrastructure.html">IT Infrastructure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary</a></li>
 </ul>
 
    <p class="caption">
@@ -89,8 +78,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a></li>
-          <li class="breadcrumb-item"><a href="../managing-code-and-data.html">Managing Code and Data</a></li>
-      <li class="breadcrumb-item active">Version Control</li>
+          <li class="breadcrumb-item"><a href="../IT-infrastructure.html">IT Infrastructure</a></li>
+      <li class="breadcrumb-item active">Introduction</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -99,28 +88,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="version-control">
-<h1>Version Control<a class="headerlink" href="#version-control" title="Permalink to this heading"></a></h1>
-<span class="target" id="repository"></span><p id="index-0">A version control system (VCS) is a software tool that allows you to manage a
-tree of <em>source code</em> files and keep track of who changes what, when, and why.
-Version control <strong>repositories</strong> store the whole history of changes so that any
-past version of the file tree can be recovered. In particular when collaborating
-on code with multiple people, using a VCS is a must.</p>
-<p>But can a VCS be pressed into use to manage data as well as code? In principle,
-yes: a dataset is just another collection of files. But data can be much larger
-than code and thereby cripple the performance of the VCS.</p>
-<p>Fortunately, a modern VCS running on modern hardware can be decently performant.
-Moreover, extensions have been invented that allow VCSs to handle large files
-efficiently. It therefore makes sense to use a VCS as the basis for a code and
-data management approach.</p>
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h1>
+<p>The ForestNavigator IT infrastructure provides a shared platform for deployment
+of models, data repositories, and web apps. By using a shared platform, the
+exchange of data and creation of interfaces is supported and enables:</p>
+<ul class="simple">
+<li><p>Dissemination of data and results to the general public.</p></li>
+<li><p>Collaboration on deliverables that cut across project partners.</p></li>
+<li><p>Access to shared datasets and data stores for models and web apps.</p></li>
+<li><p>Automation of links between models.</p></li>
+<li><p>The hosting and publishing of model and tool code.</p></li>
+<li><p>…</p></li>
+</ul>
+<p>Widely-used modern components were chosen to comprise the IT infrastructure so
+that ForestNavigator can benefit from well-developed IT practices and knowledge.</p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="the-git-ecosystem.html" class="btn btn-neutral float-right" title="The Git ecosystem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../IT-infrastructure.html" class="btn btn-neutral float-left" title="IT Infrastructure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="GitHub.html" class="btn btn-neutral float-right" title="GitHub" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

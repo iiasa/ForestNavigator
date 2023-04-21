@@ -20,7 +20,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Understanding Git" href="understanding-git.html" />
+    <link rel="next" title="Documentation" href="documentation.html" />
     <link rel="prev" title="Workflows" href="workflows.html" /> 
 </head>
 
@@ -33,7 +33,7 @@
             <img src="../_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v2023-3-30
+                v2023-4-21
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -54,23 +54,21 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">FAIR principles, formats, and reproducibility</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#fair-principles">FAIR principles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#text-formats">Text formats</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reproducibility">Reproducibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metadata-formats">Metadata formats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#licensing">Licensing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reproducibility">Reproducibility</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html">Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="understanding-git.html">Understanding Git</a></li>
 <li class="toctree-l2"><a class="reference internal" href="taming-git.html">Taming Git</a></li>
 <li class="toctree-l2"><a class="reference internal" href="specialized-data-stores.html">Specialized Data Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="release-management.html">Release Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="good-practices-example.html">Good practices example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="go-with-the-flow.html">Go with the flow</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../it-infrastructure.html">IT Infrastructure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../containers.html">Containers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../containerization.html">Containerization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../IT-infrastructure.html">IT Infrastructure</a></li>
 </ul>
 
    <p class="caption">
@@ -109,7 +107,12 @@
 <span id="index-0"></span><h1>FAIR principles, formats, and reproducibility<a class="headerlink" href="#fair-principles-formats-and-reproducibility" title="Permalink to this heading"></a></h1>
 <section id="fair-principles">
 <h2>FAIR principles<a class="headerlink" href="#fair-principles" title="Permalink to this heading"></a></h2>
-<a class="reference internal image-reference" href="../_images/FAIR_data_principles.jpg"><img alt="../_images/FAIR_data_principles.jpg" class="align-center" src="../_images/FAIR_data_principles.jpg" style="width: 600px;" /></a>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../_images/FAIR_data_principles.jpg"><img alt="../_images/FAIR_data_principles.jpg" src="../_images/FAIR_data_principles.jpg" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">© Sangya Pundir</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 <p>For ForestNavigator we are obliged abide by <a class="reference external" href="https://www.go-fair.org/fair-principles/">FAIR principles</a> for
 research data management. Please ensure that you are familiar with the FAIR
 principles as listed on the linked website. Bookmark it for reference.</p>
@@ -123,7 +126,7 @@ data management workflow that accommodates several FAIR concerns:</p>
 <li><p><a class="reference internal" href="release-management.html#zenodo-release"><span class="std std-ref">Publishing on Zenodo</span></a> makes your data (and your code!)
 findable, provides a unique persistent identifier (<a class="reference external" href="https://www.go-fair.org/fair-principles/f3-metadata-clearly-explicitly-include-identifier-data-describe/">F3</a>),
 and registers metadata (<a class="reference external" href="https://www.go-fair.org/fair-principles/f4-metadata-registered-indexed-searchable-resource/">F4</a>.</p></li>
-<li><p><a class="reference internal" href="release-management.html#release-github-gitlab"><span class="std std-ref">Releasing on GitHub or GitLab</span></a> improves
+<li><p><a class="reference internal" href="release-management.html#release-github-gitlab"><span class="std std-ref">Releasing on GitHub or GitLab</span></a>) improves
 accessibility, in particular by allowing for robust automated retrieval.</p></li>
 </ul>
 <p>Moreover, using a hosted Git repository automatically complies with or supports
@@ -142,9 +145,7 @@ where necessary</a></p></li>
 <li><p>Are machine-readable.</p></li>
 </ul>
 <p>For example, <a class="reference external" href="https://en.wikipedia.org/wiki/NetCDF">NetCDF</a> is a good choice
-— picking Excel is problematic for many reasons. Suitable metadata standards can
-be selected by exploring the <a class="reference external" href="https://www.dcc.ac.uk/guidance/standards/metadata/list">DCC Metadata Standards</a> and the <a class="reference external" href="https://rdamsc.bath.ac.uk/">Metadata
-Standards Catalog</a>.</p>
+— picking Excel is problematic for many reasons.</p>
 </section>
 <section id="text-formats">
 <span id="index-1"></span><h2>Text formats<a class="headerlink" href="#text-formats" title="Permalink to this heading"></a></h2>
@@ -171,29 +172,32 @@ that, you can <a class="reference external" href="https://git-scm.com/book/en/v2
 automatically convert newline encoding on commit or checkout.</p>
 </div>
 </section>
-<section id="reproducibility">
-<span id="index-4"></span><h2>Reproducibility<a class="headerlink" href="#reproducibility" title="Permalink to this heading"></a></h2>
-<p>Reproducibility is a basic tenet of science. Following the FAIR principles goes
-some way towards making your research reproducible. Also using a Git-based
-workflow allows you or others to go back in time and retrieve old code or data
-versions to reproduce prior results. When you expect that your current work may
-need to be reproduced in the future, you can have <a class="reference internal" href="release-management.html#tagging"><span class="std std-ref">Git tag the current
-commit or use more involved release management</span></a> to enable people to easily
-return to this point in your file tree’s history.</p>
-<p>Even when all FAIR principles have been followed, just providing the data may
-not be enough for reproducibility. Also providing the actual code that does the
-data wrangling is often necessary to make it practical to reproduce results. But
-how to tie code to the actual data used or produced? Here too, a Git-based
-workflow can help out. You can for example:</p>
-<ul class="simple">
-<li><p>Include code and data in the same Git repository.</p></li>
-<li><p><a class="reference internal" href="workflows.html#referencing-repositories"><span class="std std-ref">Reference a Git data repository</span></a> from a Git code
-repository as a submodule.</p></li>
-<li><p><a class="reference internal" href="workflows.html#referencing-assets"><span class="std std-ref">Reference data on a remote server</span></a> by URL from a Git code
-repository and include download scripting.</p></li>
-<li><p>Publish result data in a Git repository that references as a submodule the
-repository containing the code used to perform the processing.</p></li>
-</ul>
+<section id="metadata-formats">
+<span id="index-4"></span><h2>Metadata formats<a class="headerlink" href="#metadata-formats" title="Permalink to this heading"></a></h2>
+<p>Several <a class="reference external" href="https://www.go-fair.org/fair-principles/">FAIR principles</a> give
+guidance on metadata. The principle:</p>
+<p><a class="reference external" href="https://www.go-fair.org/fair-principles/r1-3-metadata-meet-domain-relevant-community-standards/">R1.3: (Meta)data meet domain-relevant community standards</a></p>
+<p>indicates that the selection of metadata formats requires attention. A metadata
+format suitable for a particular field of research can be selected by exploring
+the <a class="reference external" href="https://www.dcc.ac.uk/guidance/standards/metadata/list">DCC Metadata Standards</a> and the <a class="reference external" href="https://rdamsc.bath.ac.uk/">Metadata
+Standards Catalog</a>.  In addition there are
+various metadata formats for use cases such as publishing on Zenodo, publishing
+code as a package in a package repository, assisting citation, and so on.
+Moreover, some data formats such as NetCDF allow inclusion of metadata inside of
+the data files.</p>
+<p>This proliferation of formats covers a spectrum of use cases that may or may not
+be important to the code and data that you are managing, the usage context, and
+the audience that you are trying to reach. In principle, the more formats that
+you use for adding metadata, the better. In practice, this takes effort. Use
+common sense to make a selection.</p>
+<div class="admonition-todo admonition" id="id3">
+<p class="admonition-title">Todo</p>
+<p>Unfortunately, particular fields recur…</p>
+</div>
+<div class="admonition-todo admonition" id="id4">
+<p class="admonition-title">Todo</p>
+<p>Include ForestNavigator-specific minimum field list.</p>
+</div>
 </section>
 <section id="licensing">
 <h2>Licensing<a class="headerlink" href="#licensing" title="Permalink to this heading"></a></h2>
@@ -218,77 +222,56 @@ and thereby the files contained in it. This typically involves including a file
 detailing the license in the repository. For repositories hosted on GitHub, the
 GitHub web interface provides <a class="reference external" href="https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository">an easy way to do so</a>.
 For standard license types, it can be sufficient to specify the license type as
-part of metadata. <a class="reference internal" href="release-management.html#zenodo-metadata"><span class="std std-ref">Zenodo metadata</span></a> includes a license
-field.</p>
+part of metadata and a <a class="reference internal" href="documentation.html#readme"><span class="std std-ref">README</span></a>. <a class="reference internal" href="release-management.html#zenodo-metadata"><span class="std std-ref">Zenodo metadata</span></a> includes a license field. The <a class="reference external" href="https://citation-file-format.github.io/">Citation File Format</a> (CFF) too has optional license
+fields.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can use the <a class="reference external" href="https://citation-file-format.github.io/cff-initializer-javascript/">CFF INIT</a>
+online tool to create a CFF file.</p>
+</div>
 <p>Different parts of your code base or dataset may be subject to different
 licensing conditions. In such a case, you need to carefully specify which
 license pertains to what, or break up the tree of files under management such
 that repositories hold only files subject to a single license. These separate
-repositories can be combined into a single tree via <a class="reference internal" href="workflows.html#submodule-references"><span class="std std-ref">Git submodule
-references</span></a>.</p>
+repositories can be combined into a single tree via <span class="xref std std-ref">Git submodule
+references</span>.</p>
 </section>
-<section id="documentation">
-<span id="index-5"></span><h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h2>
-<p>Reusability and reproducibility is supported by useful documentation. Metadata
-and in-code comments are limited. Human-readable documentation can provide the
-missing context and give detailed guidance.</p>
-<p id="index-6">When managing code or data with Git, at a minimum include a small README text
-file at the root of the tree with a brief synopsis. When the Git repository is
-hosted on GitHub or GitLab, using <a class="reference external" href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> — as a <code class="docutils literal notranslate"><span class="pre">README.md</span></code> at the root of
-the repository — or one of the other markup formats supported by GitHub/GitLab,
-will provide richer documentation that renders as a webpage with styling and
-links when browsing the repository via the GitHub/GitLab web interface, yet
-still can be read as a text file after cloning the repository for offline use.
-For an introduction see the <a class="reference external" href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github">quickstart for writing on GitHub</a>
-and the description of GitLab <a class="reference external" href="https://docs.gitlab.com/ee/user/project/repository/index.html#readme-and-index-files">README and index files</a>.
-You can include several such markup files in a repository and link them together
-to create quite elaborate documentation that is co-managed with your code or
-data.</p>
-<p>See for example <a class="reference external" href="https://github.com/iiasa/Condor_run_R/blob/master/README.md">this Markdown README</a> of a repository
-that includes multiple Markdown files to provide elaborate documentation
-webpages via GitHub.</p>
-<p id="index-7">When the documentation is an ad-hoc effort shared among collaborators, instead
-using the <a class="reference external" href="https://docs.github.com/en/communities/documenting-your-project-with-wikis/about-wikis">GitHub wiki</a>
-or <a class="reference external" href="https://docs.gitlab.com/ee/user/project/wiki/">GitLab wiki</a> service
-associated with a repository should be considered. Beware though that this makes
-your documentation dependent on either platform, and will no longer include the
-documentation when the repository is cloned. It is therefore important to still
-include a README that links to the wiki.</p>
-<p>For more elaborate needs, many other options exist. For example, the <a class="reference external" href="https://pages.github.com/">GitHub
-pages service</a> allows you to set up a website with
-provided-for hosting. Generating a web site and other documentation formats from
-in-code comments using tools such <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> is highly recommended since it makes
-it easier to keep code and documentation in-sync. Sphinx can also be used to
-generate documentation from text-based markup files that can be well-managed
-with Git.</p>
-<p>A good example is the IIASA <a class="reference external" href="https://github.com/iiasa/message_ix">MESSAGEix model framework repository</a> hosted on GitHub. It has a
-<code class="docutils literal notranslate"><span class="pre">README.md</span></code> that among other things mentions the license, but also holds a
-<code class="docutils literal notranslate"><span class="pre">CITATION.cff</span></code> file. Elaborate documentation is provided via a <a class="reference external" href="https://docs.messageix.org">MESSAGEix
-documentation website</a>. The <a class="reference external" href="https://docs.messageix.org/en/stable/api.html">documentation for
-the Python API</a> is generated
-from in-code comments. Other content for the website is managed in a <a class="reference external" href="https://github.com/iiasa/message_ix/tree/main/doc">doc
-subdirectory of the repository</a> from which the website is
-built using Sphinx.</p>
-<p id="index-8">When documentation might become elaborate — as will be the case for a large
-model — plan for its maintenance. Information will become outdated. Links to
-external resources will break. Using a documentation generator such as Sphinx
-can save a lot of time by automating the creation of updates of documentation in
-multiple formats. Sphinx will also check links on generation. When using links
-in markup files in a repository or a wiki, you can use a link checker such as
-<a class="reference external" href="https://lychee.cli.rs">Lychee</a> and automate it via <a class="reference external" href="https://github.com/features/actions">GitHub Actions</a> or otherwise.</p>
+<section id="reproducibility">
+<span id="index-5"></span><h2>Reproducibility<a class="headerlink" href="#reproducibility" title="Permalink to this heading"></a></h2>
+<p>Reproducibility is a basic tenet of science. Following the FAIR principles goes
+some way towards making your research reproducible. Also using a Git-based
+workflow allows you or others to go back in time and retrieve old code or data
+versions to reproduce prior results. When you expect that your current work may
+need to be reproduced in the future, you can have <a class="reference internal" href="release-management.html#tagging"><span class="std std-ref">Git tag the current
+commit or use more involved release management</span></a> to enable people to easily
+return to this point in your file tree’s history.</p>
+<p>Even when all FAIR principles have been followed, just providing the data may
+not be enough for reproducibility. Also providing the actual code that does the
+data wrangling is often necessary to make it practical to reproduce results. But
+how to tie code to the actual data used or produced? Here too, a Git-based
+workflow can help out. You can for example:</p>
+<ul class="simple">
+<li><p>Include code and data in the same Git repository.</p></li>
+<li><p><a class="reference internal" href="workflows.html#referencing-repositories"><span class="std std-ref">Reference a Git data repository</span></a> from a Git code
+repository as a submodule.</p></li>
+<li><p><a class="reference internal" href="workflows.html#referencing-assets"><span class="std std-ref">Reference data on a remote server</span></a> by URL from a Git code
+repository and include download scripting.</p></li>
+<li><p>Publish result data in a Git repository that references as a submodule the
+repository containing the code used to perform the processing.</p></li>
+</ul>
 <hr class="docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>Compared to binary data, text-based numerical data takes up about a
-factor of three more space at full precision,<a class="footnote-reference brackets" href="#f3" id="id3">3</a> and may take
-considerable time to parse.</p>
+factor of three more space at full precision,<a class="footnote-reference brackets" href="#f3" id="id5">3</a> and parsing it may
+require a significant amount of time.</p>
 </dd>
 <dt class="label" id="f2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
 <dd><p>Formats such as JSON and XML can have all content scrunched onto a
 single long line. A “pretty print” option that flows the text across
 multiple lines is available in libraries that write these formats.</p>
 </dd>
-<dt class="label" id="f3"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dt class="label" id="f3"><span class="brackets"><a class="fn-backref" href="#id5">3</a></span></dt>
 <dd><p>Floating point numbers require special care when represented as text.
 The full binary precision will only be encoded in the text if you allow for
 sufficient digits of precision instead of truncating with few digits after
@@ -303,7 +286,7 @@ the decimal point when generating the text.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="workflows.html" class="btn btn-neutral float-left" title="Workflows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="understanding-git.html" class="btn btn-neutral float-right" title="Understanding Git" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="documentation.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

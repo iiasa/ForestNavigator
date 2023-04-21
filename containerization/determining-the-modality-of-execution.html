@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Version Control &mdash; ForestNavigator  documentation</title>
+  <title>Determining the modality of execution &mdash; ForestNavigator  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The Git ecosystem" href="the-git-ecosystem.html" />
-    <link rel="prev" title="Introduction" href="introduction.html" /> 
+    <link rel="next" title="Workflows" href="workflows.html" />
+    <link rel="prev" title="Interfaces" href="interfaces.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,22 +46,20 @@
    
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../containerization.html">Containerization</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Version Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="the-git-ecosystem.html">The Git ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images-and-containers.html">Images and Containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advantages.html">Advantages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical_background.html">Technical background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html">Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networking.html">Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces.html">Interfaces</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Determining the modality of execution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="workflows.html">Workflows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="FAIR-principles.html">FAIR principles, formats, and reproducibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation.html">Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="understanding-git.html">Understanding Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="taming-git.html">Taming Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="specialized-data-stores.html">Specialized Data Stores</a></li>
-<li class="toctree-l2"><a class="reference internal" href="release-management.html">Release Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="good-practices-example.html">Good practices example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="go-with-the-flow.html">Go with the flow</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../containerization.html">Containerization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../IT-infrastructure.html">IT Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary</a></li>
@@ -89,8 +87,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a></li>
-          <li class="breadcrumb-item"><a href="../managing-code-and-data.html">Managing Code and Data</a></li>
-      <li class="breadcrumb-item active">Version Control</li>
+          <li class="breadcrumb-item"><a href="../containerization.html">Containerization</a></li>
+      <li class="breadcrumb-item active">Determining the modality of execution</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -99,28 +97,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="version-control">
-<h1>Version Control<a class="headerlink" href="#version-control" title="Permalink to this heading"></a></h1>
-<span class="target" id="repository"></span><p id="index-0">A version control system (VCS) is a software tool that allows you to manage a
-tree of <em>source code</em> files and keep track of who changes what, when, and why.
-Version control <strong>repositories</strong> store the whole history of changes so that any
-past version of the file tree can be recovered. In particular when collaborating
-on code with multiple people, using a VCS is a must.</p>
-<p>But can a VCS be pressed into use to manage data as well as code? In principle,
-yes: a dataset is just another collection of files. But data can be much larger
-than code and thereby cripple the performance of the VCS.</p>
-<p>Fortunately, a modern VCS running on modern hardware can be decently performant.
-Moreover, extensions have been invented that allow VCSs to handle large files
-efficiently. It therefore makes sense to use a VCS as the basis for a code and
-data management approach.</p>
+  <section id="determining-the-modality-of-execution">
+<h1>Determining the modality of execution<a class="headerlink" href="#determining-the-modality-of-execution" title="Permalink to this heading"></a></h1>
+<p>Before starting with containerization, it is important to clearly determine the
+modality of execution of the software that you intend to containerize. You can
+do so by asking yourself and answering questions such as:</p>
+<ul class="simple">
+<li><p>What dependencies and environment does the software require during
+its execution?</p></li>
+<li><p>When should the software start?</p></li>
+<li><p>When should the software stop?</p></li>
+<li><p>What services does the software need to access during its execution? For each
+service consider the following questions:</p>
+<ul>
+<li><p>Can the service be run as a separate container deployed on the same
+ForestNavigator Kubernetes cluster? (preferred if possible because it
+allows much benefit to be derived from the orchestration functionality
+provided by Kubernetes).</p></li>
+<li><p>Is the service available only remotely via the Internet?</p></li>
+<li><p>If neither of the above, is there <em>really</em> no other option than deploying
+the service in the same container? (a last resort).</p></li>
+</ul>
+</li>
+<li><p>What service does the software provide during its execution?</p></li>
+<li><p>Should the software execute as a job?</p>
+<ul>
+<li><p>Taking in inputs at the start and producing outputs at the end.</p></li>
+<li><p>For example, a model scenario run.</p></li>
+</ul>
+</li>
+<li><p>Does the software need to run continuously?</p>
+<ul>
+<li><p>For example, because it provides an on-demand service.</p></li>
+</ul>
+</li>
+<li><p>What inputs from outside the container does the software process?</p></li>
+<li><p>What output should the software deliver outside of the container?</p></li>
+<li><p>Can or do parts of the software execute in parallel?</p>
+<ul>
+<li><p>If so, can these be put in separate containers?</p></li>
+</ul>
+</li>
+<li><p>Can multiple copies of the software execute in parallel?</p>
+<ul>
+<li><p>Can these be run as multiple container instances?</p></li>
+</ul>
+</li>
+</ul>
+<p>The answers to these questions will obviously constrain how the container images
+have to be built, what interfaces should be defined, what file and network
+resources should be provided, and how the running of the containers is to be
+orchestrated.</p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="the-git-ecosystem.html" class="btn btn-neutral float-right" title="The Git ecosystem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="interfaces.html" class="btn btn-neutral float-left" title="Interfaces" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="workflows.html" class="btn btn-neutral float-right" title="Workflows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

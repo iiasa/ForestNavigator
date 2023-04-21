@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Version Control" href="version-control.html" />
-    <link rel="prev" title="Managing Code and Data" href="../managing-code-and-data.html" /> 
+    <link rel="next" title="Images and Containers" href="images-and-containers.html" />
+    <link rel="prev" title="Containerization" href="../containerization.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,22 +46,20 @@
    
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../containerization.html">Containerization</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="version-control.html">Version Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="the-git-ecosystem.html">The Git ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images-and-containers.html">Images and Containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advantages.html">Advantages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical_background.html">Technical background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html">Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networking.html">Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces.html">Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="determining-the-modality-of-execution.html">Determining the modality of execution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="workflows.html">Workflows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="FAIR-principles.html">FAIR principles, formats, and reproducibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation.html">Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="understanding-git.html">Understanding Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="taming-git.html">Taming Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="specialized-data-stores.html">Specialized Data Stores</a></li>
-<li class="toctree-l2"><a class="reference internal" href="release-management.html">Release Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="good-practices-example.html">Good practices example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="go-with-the-flow.html">Go with the flow</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../containerization.html">Containerization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../IT-infrastructure.html">IT Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary</a></li>
@@ -89,7 +87,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a></li>
-          <li class="breadcrumb-item"><a href="../managing-code-and-data.html">Managing Code and Data</a></li>
+          <li class="breadcrumb-item"><a href="../containerization.html">Containerization</a></li>
       <li class="breadcrumb-item active">Introduction</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -101,50 +99,50 @@
              
   <section id="introduction">
 <span id="index-0"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h1>
-<p>Handling files is something we all have to deal with, whether code, data or
-otherwise. If you are an owner of or collaborator on a code base or dataset,
-there are many <em>ad hoc</em> means at your disposal for changing, copying, sharing,
-and processing the set of files. This makes <strong>managing</strong> files in a
-well-controlled manner tricky:</p>
-<ul class="simple">
-<li><p>What changes were made to this file and why?</p></li>
-<li><p>What is different between Alice’s copy of the files and Bob’s?</p></li>
-<li><p>Which file changes should be kept, and which can be discarded?</p></li>
-<li><p>Should these curious files be kept or are they processing artifacts?</p></li>
-<li><p>Alice and Bob both changed their personal copy of the same file, how can their
-modifications be reconciled?</p></li>
-<li><p>What data was used for last month’s run?</p></li>
-</ul>
-<p>Managing a collection of files requires answering such questions. It does not
-take many changes, copies, collaborators, or weeks of interruption<a class="footnote-reference brackets" href="#f1" id="id1">1</a>
-before this becomes practically impossible without software assistance. The
-following pages suggest means of practical software-assisted management that can
-be adapted to fit your use case.</p>
-<p>When you adopt these means, you can set up a workflow — customized for your own
-or your team’s needs — that allows you to evolve and release well-controlled
-versions of the file tree, with attached and verified copies of the files
-located where needed for editing, processing, review, or backup purposes. All
-under <strong>unified management</strong>.</p>
-<p>In the long run this will save much time and avoid many mistakes relative to
-managing manually or with outdated tools and workflows. The choice is yours.</p>
-<hr class="docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Even when you manage a set of files by yourself, you will be
-collaborating: with your future you. Your future you may have forgotten what
-you know now, particularly when returning to the project after a long
-interruption. You will thank yourself for having managed change properly by
-keeping good record of the what and why.</p>
-</dd>
-</dl>
+<p>The ForestNavigator models, front ends, and back ends are very diverse. By
+deploying each in a customized container, they can run without interference,
+have their custom requirements catered for, while still being able to
+communicate and share resources in a well-managed manner.</p>
+<p id="containers"><strong>Containers</strong> are software components that from the “inside” look like a
+regular computer that runs an operating system and other basic software as
+required by a model or app. Any software that can be installed on a regular
+computer can therefore readily be adapted to run inside a container. A
+configurable amount of memory and storage is allocated to a container. From the
+“outside” — instead of having a screen, keyboard, and a network cable — a
+container is dynamically connected via software to other containers, shared
+resources, and where needed the Internet.</p>
+<p>For an example of collaborative modeling via containerized models, see
+the <a class="reference external" href="https://pecanproject.github.io/pecan-documentation/master/model-docker.html#model-docker">PEcAn
+project</a>.</p>
+<p id="index-1"><strong>Containerization</strong> is the process of readying software for running as
+a container. In principle, it is highly similar to acquiring a computer,
+installing an operating system, and then installing an application. It
+is done through scripting and automation so that containers can be
+easily replicated, re-configured, re-installed with an updated version
+of the software, re-tested, and re-deployed.</p>
+<p>The resulting scripts define how the container is built up, and how the
+software is to be installed in it and started. Further scripts might
+specify how the container is to be tested, deployed, and provided with
+external resources. It is easier to ensure that these containerization
+scripts are in-sync with the software being containerized when
+maintaining them in the same <a class="reference internal" href="../managing-code-and-data/version-control.html#repository"><span class="std std-ref">repository</span></a> as that
+which holds the source code of the software.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Instead of separately using an editor and other tools for containerization,
+you may prefer a more integrated toolkit. A popular way to compile such a
+toolkit is to use <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a> and
+install <a class="reference external" href="https://marketplace.visualstudio.com/vscode">extensions</a> that help
+out with various aspects of containerization.</p>
+</div>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../managing-code-and-data.html" class="btn btn-neutral float-left" title="Managing Code and Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="version-control.html" class="btn btn-neutral float-right" title="Version Control" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../containerization.html" class="btn btn-neutral float-left" title="Containerization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="images-and-containers.html" class="btn btn-neutral float-right" title="Images and Containers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

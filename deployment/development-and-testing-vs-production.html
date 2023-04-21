@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Development and Testing vs Production &mdash; ForestNavigator  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Workflows" href="workflows.html" />
+    <link rel="prev" title="Composition and Orchestration" href="composition-and-orchestration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #C8C8C8" >
+            <a href="../index.html">
+            <img src="../_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2023-4-21
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+   
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../managing-code-and-data.html">Managing Code and Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../containerization.html">Containerization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../IT-infrastructure.html">IT Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../deployment.html">Deployment</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="composition-and-orchestration.html">Composition and Orchestration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Development and Testing vs Production</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bind-mounts-for-easy-development-and-testing">Bind mounts for easy development and testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accommodating-build-steps">Accommodating build steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-secure-and-scalable-production-database">A secure and scalable production database</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary</a></li>
+</ul>
+
+   <p class="caption">
+     <span class="caption-text">References:</span>
+   </p>
+   <ul>
+        <li class="toctree-l1"><a href= "../genindex.html">Index</a></li>
+   </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #C8C8C8" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ForestNavigator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../deployment.html">Deployment</a></li>
+      <li class="breadcrumb-item active">Development and Testing vs Production</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="development-and-testing-vs-production">
+<h1>Development and Testing vs Production<a class="headerlink" href="#development-and-testing-vs-production" title="Permalink to this heading"></a></h1>
+<p>Containers provide an isolated, encapsulated, and reproducible environment. It
+is therefore reasonable to expect containerized software to behave identically
+during development and testing, and once deployed into production. This is
+indeed the case for individual containerized applications that do not interact
+with other containers or external services. But once multiple containers are
+composed to a more complex system, some differences between development,
+testing, and production are likely to become necessary. Here we review some
+common scenarios.</p>
+<section id="bind-mounts-for-easy-development-and-testing">
+<span id="bind-mount"></span><h2>Bind mounts for easy development and testing<a class="headerlink" href="#bind-mounts-for-easy-development-and-testing" title="Permalink to this heading"></a></h2>
+<p>When changing the source code or configuration files of containerized software,
+the default workflow is to rebuild the container and test it. But building a
+container and restarting it can be time consuming. It is more convenient to map
+files on the filesystem of your development machine into the container via
+<strong>bind mounts</strong> so that you can change the configuration, and with proper
+language runtime support also the source code, while the container keeps on
+running. This can greatly speed up the develop-and-test cycle. Bind mounts are
+used to set up host-exposing <a class="reference internal" href="../containerization/files.html#file-volumes"><span class="std std-ref">file volumes</span></a>.</p>
+<p>Bind mounts should not be used when containers are deployed into production
+since they break the encapsulation and isolation and place requirements on the
+filesystem of the remote host. It is therefore good practice to have conditional
+container build instructions that set up bind mounts for files when building a
+container for development and testing, but copy those files into the container
+when building the container for deployment into production.</p>
+</section>
+<section id="accommodating-build-steps">
+<h2>Accommodating build steps<a class="headerlink" href="#accommodating-build-steps" title="Permalink to this heading"></a></h2>
+<p>Depending on development framework and language runtime, the software
+being containerized can have build steps. For example, for code
+generation or conventional compilation to binary code. For easy
+development and testing, you will want to set up a fast
+modify-and-rebuild workflow that on making a change — and probably with
+the aid of bind mounts — quickly executes the build step on your
+development machine and makes the results available to the container
+being testing.</p>
+<p>When building the container for production, this build step will also
+need to be executed, but only once from well-tested and validated
+inputs. This requires and additional stage in the build process. <a class="reference external" href="https://docs.docker.com/build/building/multi-stage/">Docker
+multi-stage builds</a>
+provide a mechanism for implementing that.</p>
+</section>
+<section id="a-secure-and-scalable-production-database">
+<h2>A secure and scalable production database<a class="headerlink" href="#a-secure-and-scalable-production-database" title="Permalink to this heading"></a></h2>
+<p>When your containerized application uses a database, which typically is
+exposed as a service external to the container, you will want to set up
+up a separate database instance for development and testing. This allows
+you to try all code paths of the containerized software during testing,
+adding and destroying mock database content as needed. The test database
+will not contain assets that need to be protected, so insecurely stored
+credentials suffice.</p>
+<p>The production database on the other hand is likely to contain data of
+value that should not be endangered by testing. The credentials used to
+access the production database should be securely stored. This means
+that the containerized software deployed into production should connect
+to a different database instance using securely provisioned credentials,
+and refrain from running test code on that database. The container
+should therefore be built with a production-aware configuration.</p>
+<p>The scaling of the production database can present challenges. Adding
+more database container instances does not work for conventional
+transactional databases since these do not have a distributed design.
+But large spikes in demand cannot be handled with a single database
+instance. When designing a containerized application that uses a
+database it is therefore important to think about worst-case production
+requirements early so as to avoid choosing a database setup that does
+not scale sufficiently.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="composition-and-orchestration.html" class="btn btn-neutral float-left" title="Composition and Orchestration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="workflows.html" class="btn btn-neutral float-right" title="Workflows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Albert Brouwer, IIASA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
