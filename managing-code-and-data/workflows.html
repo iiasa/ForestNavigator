@@ -33,7 +33,7 @@
             <img src="../_static/ForestNavigator_logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v2023-4-21
+                v2023-10-30
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -62,6 +62,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#release-on-gitlab-github-and-zenodo">Release on GitLab, GitHub, and Zenodo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#forking-and-pull-requests">Forking and Pull Requests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#caching-datasets">Caching datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#providing-input">Providing input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#returning-output">Returning output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#referencing-repositories">Referencing repositories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#referencing-assets">Referencing assets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#custom-workflow">Custom workflow</a></li>
@@ -73,7 +75,7 @@
 <li class="toctree-l2"><a class="reference internal" href="taming-git.html">Taming Git</a></li>
 <li class="toctree-l2"><a class="reference internal" href="specialized-data-stores.html">Specialized Data Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="release-management.html">Release Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="good-practices-example.html">Good practices example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="good-practices-examples.html">Good practices examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="go-with-the-flow.html">Go with the flow</a></li>
 </ul>
 </li>
@@ -242,17 +244,28 @@ official upstream repository that you manage. After making an improvement, users
 will often want to contribute it back (upstream it) so that they can later
 benefit from releases that contain their improvement as well as other upstream
 improvements: without upstreaming, new releases would have to be merged with the
-fork in order to get all improvements. Both GitHub and GitLab enable users to
-contribute without having push access to the upstream repository by means of a
-<a class="reference external" href="https://docs.github.com/en/pull-requests">pull request</a>.</p>
+fork in order to get all improvements. GitHub enables users to contribute
+without having push access to the upstream repository by means of a <a class="reference external" href="https://docs.github.com/en/pull-requests">pull
+request</a>. GitLab has a very similar
+feature called a <a class="reference external" href="https://docs.gitlab.com/ee/user/project/merge_requests/">merge request</a> which works from a
+fork when using the <a class="reference external" href="https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html">forking workflow</a>.
+Both GitLab merge requests and GitHub pull requests can also be used to
+<a class="reference internal" href="taming-git.html#branch"><span class="std std-ref">merge a branch</span></a> located in the
+same hosted repository, instead of from a forked repository.</p>
+<p>Though Git itself has built-in features that can merge a branch in the same local
+repository, or fetch and merge a branch from a remote repository, instead using
+a GitHub pull request or a GitLab merge request can be done through the web
+interface of either platform and provides for convenient collaboration via
+comments, notifications, and assignment of a user responsible for handling the
+request, and so on.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Even when the upstream repository is not public, and collaboration is local
 to an organization, this workflow can be a good choice:</p>
 <ul class="simple">
-<li><p>The pull requests allow review and discussion of changes to the upstream
-repository before they are accepted.</p></li>
-<li><p>The forks will serve as cloud-hosted backups for the specific content of
+<li><p>The pull/merge requests allow review and discussion of changes to the
+upstream repository or main branch before they are accepted.</p></li>
+<li><p>The forks can serve as cloud-hosted backups for the specific content of
 the local repositories of collaborators.</p></li>
 </ul>
 </div>
@@ -275,6 +288,85 @@ run.</p>
 <p>Before using this workflow to cache <em>very large</em> datasets, coordinate with
 the administrators hosting the Git LFS server to ensure that it has
 sufficient capacity.</p>
+</div>
+</section>
+<section id="providing-input">
+<h2>Providing input<a class="headerlink" href="#providing-input" title="Permalink to this heading"></a></h2>
+<a class="reference internal image-reference" href="../_images/providing_input.svg"><img alt="../_images/providing_input.svg" class="align-center" src="../_images/providing_input.svg" width="280" /></a>
+<p>Providing input to a model or data store deployed as a container on the
+ForestNavigator Kubernetes cluster can be managed via a Git repository. By
+setting up the container with the credentials needed to pull from an
+Internet-accessible Git repository, it can import the input data, typically on
+startup. This approach provides a number of benefits:</p>
+<ul class="simple">
+<li><p>You can use a robust Git-based workflow (such as the ones outlined above) to
+manage the preparation of the input data.</p></li>
+<li><p>No bespoke mechanism for provisioning the input data to the container needs to
+be implemented: the existing Git, and GitHub or GitLab features can be reused.</p></li>
+<li><p>The repository provides a queue and retains a record of the input datasets.</p></li>
+<li><p>The specific tree of input data files used by a container is uniquely
+identified by a cryptographic Git commit hash. This makes the run easily
+reproducible at a later stage, given only the hash and repository URL.</p></li>
+</ul>
+<p>The ForestNavigator GitLab instance is a good place to host an input repository
+because it is co-located with the ForestNavigator Kubernetes cluster.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Though a specialized data store such as a relational database stores data
+itself, it can be provided with well-managed initialization input via a Git
+repository. For example schema definitions and initial table content.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Interacting with a Git repository takes time on account of all the checks and
+balances. As long as the Git operations are fast relative to the execution
+time of your code, that is fine. But if your code has to respond quickly to
+changed inputs, providing an <span class="xref std std-ref">interface</span> or <span class="xref std std-ref">monitoring a message queue</span> may be necessary.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Before opting for this workflow, profile the growth rate of the input
+repository: since it retains a full history of all input datasets, it might
+grow to an unwieldy size if for your use case the input data is large and
+changes frequently. Using <a class="reference external" href="https://docs.gitlab.com/ee/topics/git/lfs/">Git LFS</a> can postpone the point as of
+which things become painful.</p>
+</div>
+</section>
+<section id="returning-output">
+<h2>Returning output<a class="headerlink" href="#returning-output" title="Permalink to this heading"></a></h2>
+<a class="reference internal image-reference" href="../_images/returning_output.svg"><img alt="../_images/returning_output.svg" class="align-center" src="../_images/returning_output.svg" width="280" /></a>
+<p>By setting up a container with the credentials needed to push to a Git
+repository, a model deployed as a container on the ForestNavigator Kubernetes cluster
+can return output via Git. Similarly, a specialized data store deployed as a
+container can serialize its content as checkpoint files to Git. Benefits are:</p>
+<ul class="simple">
+<li><p>The output or checkpoint becomes available for retrieval via the
+Internet if the Git repository is hosted on GitLab or GitHub.</p>
+<ul>
+<li><p>Datasets can be viewed and downloaded via the repository web pages or via a
+Git client.</p></li>
+<li><p>The output or checkpoint can be made public, or users can be given select
+access via the repository settings page</p></li>
+<li><p>Automated retrieval of output for further processing can be scripted by
+invoking the Git command line client from a batch file, shell script, or via
+a package that binds Git to your language of choice.</p></li>
+</ul>
+</li>
+<li><p>The repository keeps available a historical record of versioned datasets.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Interacting with a Git repository takes time on account of all the checks and
+balances. As long as the Git operations are fast relative to the execution
+time of your code, that is fine. But if your code has to provide output
+frequently, using an <span class="xref std std-ref">interface</span> or <span class="xref std std-ref">posting to a message queue</span> may be necessary.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Before opting for this workflow, profile the growth rate of the output
+repository: since it retains a full history of all output datasets, it might
+grow to an unwieldy size if output is produced frequently. Using <a class="reference external" href="https://docs.gitlab.com/ee/topics/git/lfs/">Git LFS</a> can postpone the point as of
+which things become painful.</p>
 </div>
 </section>
 <section id="referencing-repositories">

@@ -1,2 +1,0 @@
-# ForestNavigator
-ForestNavigator collaboration repository.
